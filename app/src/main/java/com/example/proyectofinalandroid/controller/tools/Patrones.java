@@ -1,6 +1,10 @@
 package com.example.proyectofinalandroid.controller.tools;
 
-import javax.xml.transform.sax.SAXResult;
+/**
+ * Esta interfaz contiene los patrones necesarios para comprobar
+ * que los datos introducidos por el usuario son correctos
+ * @author Fernando
+ */
 
 public interface Patrones {
     /**

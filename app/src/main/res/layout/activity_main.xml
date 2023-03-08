@@ -80,12 +80,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/opcion_registrarse"
         android:layout_width="298dp"
         android:layout_height="27dp"
         android:layout_marginStart="58dp"
         android:layout_marginEnd="55dp"
         android:layout_marginBottom="30dp"
+        android:onClick="registrarse"
         android:text="¿No tienes una cuenta?, registrate"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -107,7 +108,7 @@
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/opcion_registrarse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
