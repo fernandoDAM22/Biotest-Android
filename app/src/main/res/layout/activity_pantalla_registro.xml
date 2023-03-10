@@ -189,6 +189,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
+        android:onClick="registro"
         android:id="@+id/btnRegistrarse"
         android:layout_width="148dp"
         android:textStyle="bold"

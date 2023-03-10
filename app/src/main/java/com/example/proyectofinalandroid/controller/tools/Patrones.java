@@ -25,5 +25,5 @@ public interface Patrones {
      * Este patron permite comprobar que el correo introducido por
      * el usuario es correcto
      */
-    String PATRON_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n";
+    String PATRON_EMAIL = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 }
