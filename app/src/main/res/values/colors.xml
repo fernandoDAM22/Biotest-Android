@@ -10,4 +10,8 @@
     <color name="color_fondo_inicio">#1DD1A1</color>
     <color name="color_azul_botones">#48DBFF</color>
     <color name="color_botones_cancelar">#EE5253</color>
+    <color name="color_botones_aceptar">#1DD1A1</color>
+    <color name="color_boton_apagado">#48DBFB</color>
+    <color name="color_boton_encendido">#341f97</color>
+    <color name="color_fondo_pantallas">#3C3F41</color>
 </resources>
