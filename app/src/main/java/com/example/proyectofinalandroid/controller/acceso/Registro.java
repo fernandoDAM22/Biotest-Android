@@ -1,28 +1,16 @@
 package com.example.proyectofinalandroid.controller.acceso;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-import com.example.proyectofinalandroid.activities.PantallaSeleccionarModoJuego;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
-import com.example.proyectofinalandroid.controller.tools.CrearToast;
-import com.example.proyectofinalandroid.controller.tools.Dialogos;
-import com.example.proyectofinalandroid.controller.tools.Vibracion;
-import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 import com.example.proyectofinalandroid.model.Usuario;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Registro implements Codigos {
     /**
@@ -66,15 +54,13 @@ public class Registro implements Codigos {
         if (ComprobarDatos.existeUsuario(nombre) == 0) {
             return ERROR_EXISTE_USUARIO;
         }
-        //Solo insertamos el usuario en caso de que se pulse la
-        //opcion de aceptar
-
         boolean resultado = registrarUsuario(new Usuario(nombre, Cifrado.SHA256(password1), email, telefono, USUARIO_NORMAL));
         if (resultado) {
             return CORRECTO;
-        }else {
+        } else {
             return ERROR;
         }
+
 
     }
 
@@ -96,7 +82,7 @@ public class Registro implements Codigos {
         params.put("tipo", usuario.getTipo());
         //realizamos la peticion y obtenemos la respuesta
         String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_REGISTRO, params);
-        System.err.println(respuesta);
+        //parseamos la respuesta y la devolvemos como booleano
         JsonElement element = JsonParser.parseString(respuesta);
         return element.getAsBoolean();
 

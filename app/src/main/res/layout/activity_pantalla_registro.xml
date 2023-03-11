@@ -175,6 +175,7 @@
 
     <Button
         android:id="@+id/btnCancelar"
+        android:onClick="cancelar"
         android:layout_width="148dp"
         android:layout_height="57dp"
         android:textStyle="bold"
