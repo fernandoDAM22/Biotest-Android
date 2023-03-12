@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/grupoBotones"
 
-    tools:context=".activities.PantallaSeleccionarModoJuego"
-    android:background="@color/color_fondo_pantallas">
+    android:background="@color/color_fondo_pantallas"
+    tools:context=".activities.PantallaSeleccionarModoJuego">
 
     <TextView
         android:id="@+id/textView10"
@@ -25,12 +26,12 @@
 
     <ToggleButton
         android:id="@+id/btnModoClasico"
-        android:onClick="onToggleClicked"
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="51dp"
+        android:onClick="btnClick"
         android:textColor="@color/black"
         android:textOff="Modo Clasico"
         android:textOn="Modo Clasico"
@@ -42,12 +43,12 @@
 
     <ToggleButton
         android:id="@+id/btnModoSinFallos"
-        android:onClick="onToggleClicked"
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="51dp"
+        android:onClick="btnClick"
         android:textColor="@color/black"
         android:textOff="Modo Sin Fallos"
         android:textOn="Modo Sin Fallos"
@@ -59,11 +60,12 @@
 
     <ToggleButton
         android:id="@+id/btnModoLibre"
-        android:onClick="onToggleClicked"        android:layout_width="280dp"
+        android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="29dp"
         android:layout_marginEnd="51dp"
+        android:onClick="btnClick"
         android:textColor="@color/black"
         android:textOff="Modo Libre"
         android:textOn="Modo Libre"
@@ -75,11 +77,12 @@
 
     <ToggleButton
         android:id="@+id/btnModoCuestionarios"
-        android:onClick="onToggleClicked"        android:layout_width="280dp"
+        android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="51dp"
+        android:onClick="btnClick"
         android:textColor="@color/black"
         android:textOff="Modo Cuestionarios"
         android:textOn="Modo Cuestionarios"
@@ -95,6 +98,7 @@
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="63dp"
+        android:onClick="onClickCancelar"
         android:backgroundTint="@color/color_botones_cancelar"
         android:text="Cancelar"
         android:textColor="@color/black"
@@ -109,8 +113,9 @@
         android:layout_height="69dp"
         android:layout_marginTop="63dp"
         android:layout_marginEnd="13dp"
-        android:text="Jugar"
         android:backgroundTint="@color/color_botones_aceptar"
+        android:onClick="onClickJugar"
+        android:text="Jugar"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"

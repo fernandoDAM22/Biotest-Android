@@ -10,5 +10,5 @@ public interface Constantes {
     String URL_LOGIN = SERVER + "acceso/login.php";
     String URL_EXISTE_USUARIO =  SERVER + "acceso/existeUsuario.php";
     String URL_REGISTRO = SERVER + "acceso/registro.php";
-
+    String URL_OBTENER_CUESTIONARIOS_COMPLETOS = SERVER + "admin/cuestionarios/obtenerCuestionariosCompletos.php";
 }
