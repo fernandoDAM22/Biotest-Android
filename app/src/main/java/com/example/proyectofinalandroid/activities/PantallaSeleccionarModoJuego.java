@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.proyectofinalandroid.MainActivity;
 import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionCuestionarios;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
@@ -201,13 +199,13 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         } else if (boton.equals(btnModoSinFallos)) {
             tipoPartida = TipoPartida.MODO_SIN_FALLOS;
         } else {
-            mostrarDialogoCuestionarios(this);
+            mostrarDialogoCuestionarios();
             return;
         }
         intent.putExtra("tipo",tipoPartida);
         startActivity(intent);
     }
-    private void mostrarDialogoCuestionarios(Context context) {
+    private void mostrarDialogoCuestionarios() {
         Intent intent = new Intent(this, PantallaJugar.class);
         ArrayList<String> cuestionarios = null;
         try {

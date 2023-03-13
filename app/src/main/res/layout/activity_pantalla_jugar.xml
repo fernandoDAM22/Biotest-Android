@@ -4,6 +4,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PantallaJugar">
+    tools:context=".activities.PantallaJugar"
+    android:background="@color/color_fondo_pantallas">
+
+    <TextView
+        android:id="@+id/txtRespuestasCorrectas"
+        android:layout_width="178dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="3dp"
+        android:textColor="@color/color_botones_aceptar"
+        android:layout_marginTop="58dp"
+        android:textAlignment="center"
+        android:text="Respuestas correctas: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textRespuestasIncorrectas"
+        android:layout_width="182dp"
+        android:layout_height="36dp"
+        android:textColor="@color/color_botones_cancelar"
+        android:layout_marginTop="58dp"
+        android:textAlignment="center"
+        android:text="RespuestasIncorrectas: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtEnunciado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:gravity="center"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRespuestasIncorrectas" />
+
+    <Button
+        android:id="@+id/btnOpcion1"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="@color/color_azul_botones"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnunciado"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <Button
+        android:id="@+id/btnOpcion2"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/color_azul_botones"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpcion1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <Button
+        android:id="@+id/btnOpcion3"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="23dp"
+        android:backgroundTint="@color/color_azul_botones"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpcion2"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <Button
+        android:id="@+id/btnOpcion4"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="19dp"
+        android:backgroundTint="@color/color_azul_botones"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpcion3"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="198dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpcion4">
+
+        <Button
+            android:id="@+id/btnFinalizar"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_width="200px"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20px"
+            android:backgroundTint="@color/color_botones_cancelar"
+            android:layout_weight="1"
+            android:text="Finalizar" />
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            android:layout_width="200px"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/color_botones_aceptar"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:text="Siguiente" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
