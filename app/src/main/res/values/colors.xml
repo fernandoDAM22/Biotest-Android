@@ -14,4 +14,6 @@
     <color name="color_boton_apagado">#48DBFB</color>
     <color name="color_boton_encendido">#341f97</color>
     <color name="color_fondo_pantallas">#3C3F41</color>
+    <color name="color_correcto">#2ECC71</color>
+    <color name="color_incorrecto">#E74C3C</color>
 </resources>
