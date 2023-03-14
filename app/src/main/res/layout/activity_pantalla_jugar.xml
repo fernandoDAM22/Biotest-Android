@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PantallaJugar"
+    tools:context=".view.PantallaJugar"
     android:background="@color/color_fondo_pantallas">
 
     <TextView
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textRespuestasIncorrectas"
+        android:id="@+id/txtRespuestasIncorrectas"
         android:layout_width="182dp"
         android:layout_height="36dp"
         android:textColor="@color/color_botones_cancelar"
@@ -38,14 +38,16 @@
         android:gravity="center"
         android:text=""
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textRespuestasIncorrectas" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRespuestasIncorrectas" />
 
     <Button
         android:id="@+id/btnOpcion1"
+        android:onClick="responder"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="52dp"
@@ -60,6 +62,7 @@
 
     <Button
         android:id="@+id/btnOpcion2"
+        android:onClick="responder"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="18dp"
@@ -75,6 +78,7 @@
 
     <Button
         android:id="@+id/btnOpcion3"
+        android:onClick="responder"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="23dp"
@@ -88,7 +92,8 @@
         android:layout_marginEnd="20dp"/>
 
     <Button
-        android:id="@+id/btnOpcion4"
+        android:id="@+id/btnOpcion4"        android:onClick="responder"
+
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="19dp"
@@ -102,6 +107,7 @@
         android:layout_marginEnd="20dp"/>
 
     <LinearLayout
+        android:id="@+id/layoutBotones"
         android:layout_width="409dp"
         android:layout_height="198dp"
         android:layout_marginStart="1dp"
@@ -117,6 +123,7 @@
 
         <Button
             android:id="@+id/btnFinalizar"
+            android:onClick="finalizar"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:layout_width="200px"
@@ -129,6 +136,7 @@
 
         <Button
             android:id="@+id/btnSiguiente"
+            android:onClick="siguiente"
             android:layout_width="200px"
             android:textSize="20dp"
             android:textColor="@color/black"

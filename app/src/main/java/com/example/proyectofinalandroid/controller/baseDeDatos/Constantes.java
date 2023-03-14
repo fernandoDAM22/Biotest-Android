@@ -22,4 +22,5 @@ public interface Constantes {
     String URL_OBTENER_DATOS = SERVER + "admin/preguntas/obtenerDatos.php";
 
     String URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO = SERVER + "admin/cuestionarios/obtenerIdPreguntas.php";
+    String URL_OBTENER_ID_USUARIO = SERVER + "admin/usuarios/obtenerIdUsuario.php";
 }

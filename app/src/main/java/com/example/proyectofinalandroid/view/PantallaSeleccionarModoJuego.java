@@ -1,4 +1,4 @@
-package com.example.proyectofinalandroid.activities;
+package com.example.proyectofinalandroid.view;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

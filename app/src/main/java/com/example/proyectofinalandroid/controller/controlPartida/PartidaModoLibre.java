@@ -12,7 +12,6 @@ import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

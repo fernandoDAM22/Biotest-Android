@@ -46,11 +46,11 @@ public class GestionCuestionarios {
     }
 
     public static ArrayList<Integer> obtenerIdPreguntas(String cuestionario) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<ArrayList<Integer>> future = (Future<ArrayList<Integer>>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<ArrayList<Integer>> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("nombre",cuestionario);
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO,new HashMap<>());
+            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO,data);
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {
                 ArrayList<Integer> list = new ArrayList<>();
@@ -64,6 +64,7 @@ public class GestionCuestionarios {
             }
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.proyectofinalandroid.activities.PantallaRegistro;
-import com.example.proyectofinalandroid.activities.PantallaSeleccionarModoJuego;
+import com.example.proyectofinalandroid.view.PantallaRegistro;
+import com.example.proyectofinalandroid.view.PantallaSeleccionarModoJuego;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Login;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;

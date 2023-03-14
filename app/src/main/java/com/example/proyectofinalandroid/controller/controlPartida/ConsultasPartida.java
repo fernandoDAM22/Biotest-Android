@@ -1,6 +1,7 @@
 package com.example.proyectofinalandroid.controller.controlPartida;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
+import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.model.Partida;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -37,8 +38,8 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static ArrayList<Integer> obtenerId() {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<ArrayList<Integer>> future = (Future<ArrayList<Integer>>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<ArrayList<Integer>> future = executor.submit(() -> {
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PARTIDAS,new HashMap<>());
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {
@@ -53,6 +54,7 @@ public class ConsultasPartida {
             }
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -66,19 +68,21 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static boolean insertarPartida(Partida partida) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<Boolean> future = (Future<Boolean>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Boolean> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("id", String.valueOf(partida.getId()));
-            data.put("fecha",partida.getFecha());
             data.put("puntuacion", String.valueOf(partida.getPuntuacion()));
             data.put("id_usuario", String.valueOf(partida.getIdUsuario()));
             data.put("tipo_partida",partida.getTipo());
             String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_PARTIDA,data);
+            System.out.println(respuesta);
             JsonElement element = JsonParser.parseString(respuesta);
             return element.getAsBoolean();
         });
+
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -95,8 +99,9 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static boolean insertarPregunta(int idPartida, int idPregunta, boolean acertada) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<Boolean> future = (Future<Boolean>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        Future<Boolean> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("id_partida", String.valueOf(idPartida));
             data.put("id_pregunta",String.valueOf(idPregunta));
@@ -106,6 +111,7 @@ public class ConsultasPartida {
             return element.getAsBoolean();
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -120,8 +126,8 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static boolean establecerPuntuacion(int idPartida, int puntuacion) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<Boolean> future = (Future<Boolean>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<Boolean> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("id_partida", String.valueOf(idPartida));
             data.put("puntuacion",String.valueOf(puntuacion));
@@ -130,6 +136,7 @@ public class ConsultasPartida {
             return element.getAsBoolean();
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -145,8 +152,8 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static ArrayList<String[]> obtenerPreguntasPartida(int idPartida) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<ArrayList<String[]>> future = (Future<ArrayList<String[]>>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<ArrayList<String[]>> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
@@ -161,6 +168,7 @@ public class ConsultasPartida {
             return preguntas;
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -174,8 +182,8 @@ public class ConsultasPartida {
      * @author Fernando
      */
     public static int obtenerPuntuacion(int idPartida) {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Future<Integer> future = (Future<Integer>) ((ExecutorService) executor).submit(() -> {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<Integer> future = executor.submit(() -> {
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PUNTUACION,data);
@@ -184,6 +192,7 @@ public class ConsultasPartida {
             return Integer.parseInt(result);
         });
         try {
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

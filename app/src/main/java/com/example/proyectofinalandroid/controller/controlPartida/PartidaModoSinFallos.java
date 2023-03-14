@@ -154,6 +154,7 @@ public class PartidaModoSinFallos extends GestionPartida {
             if (btnOpcion4.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion4.setBackgroundColor(colorCorrecto);
             }
+            fallo = true;
             return false;
         }
     }

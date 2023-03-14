@@ -25,7 +25,7 @@ public class GestionPreguntas {
      */
     public static ArrayList<Integer> obtenerIds(){
         Executor executor = Executors.newSingleThreadExecutor();
-        Future<ArrayList<Integer>> future = (Future<ArrayList<Integer>>) ((ExecutorService) executor).submit(() -> {
+        Future<ArrayList<Integer>> future = ((ExecutorService) executor).submit(() -> {
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS,new HashMap<>());
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {

@@ -17,21 +17,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activities.PantallaJugar"
+            android:name=".view.PantallaResultado"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.PantallaRegistro"
+            android:name=".view.PantallaJugar"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.PantallaSeleccionarModoJuego"
+            android:name=".view.PantallaRegistro"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.PantallaSeleccionarModoJuego"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

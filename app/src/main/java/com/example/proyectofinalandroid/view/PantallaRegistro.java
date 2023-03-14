@@ -1,10 +1,9 @@
-package com.example.proyectofinalandroid.activities;
+package com.example.proyectofinalandroid.view;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.view.View;
 import android.widget.TextView;
 
