@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
 import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
+import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
 
@@ -18,6 +19,7 @@ import java.util.Collections;
 
 /**
  * Esta clase nos permite jugar una partida en modo sin fallos
+ * @author Fernando
  */
 public class PartidaModoSinFallos extends GestionPartida {
     PilaSinRepetidos pila;
@@ -25,8 +27,13 @@ public class PartidaModoSinFallos extends GestionPartida {
      * Contienen los ids de todas las preguntas de la base de datos
      */
     private ArrayList<Integer> idPreguntas;
-
+    /**
+     * Objeto pregunta
+     */
     Pregunta pregunta;
+    /**
+     * Es el contador de las respuestas incorrectas en la partida
+     */
     private int contadorPreguntasCorrectas;
     /**
      * Es el contador de las preguntas incorrectas en la partida
@@ -40,8 +47,22 @@ public class PartidaModoSinFallos extends GestionPartida {
      * Nos indica si se acerto la pregunta o no
      */
     boolean fallo;
+    /**
+     * Contexto de la aplicacion
+     */
     Context context;
 
+    /**
+     * Constructor con parametros
+     * @param partida objeto de la clase partida
+     * @param btnOpcion1 boton para la primera respuesta de la partida
+     * @param btnOpcion2 boton para la segunda respuesta de la partida
+     * @param btnOpcion3 boton para la tercera respuesta de la partida
+     * @param btnOpcion4 boton para la cuarta respuesta de la partida
+     * @param enunciado TextView para el enunciado de la pregunta
+     * @param context es el contexto de la aplicacion
+     * @author Fernando
+     */
     public PartidaModoSinFallos(Partida partida, Button btnOpcion1, Button btnOpcion2, Button btnOpcion3, Button btnOpcion4, TextView enunciado, Context context) {
         super(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, enunciado);
         this.context = context;
@@ -55,7 +76,9 @@ public class PartidaModoSinFallos extends GestionPartida {
     }
 
     /**
-     * Este metodo permite seleccionar una pregunta
+     * Este metodo permite seleccionar una pregunta, cada vez que se ejecuta
+     * obtiene una pregunta diferente, esto permite que no se respondan
+     * preguntas repetidas en la misma partida
      *
      * @author Fernando
      */
@@ -133,15 +156,20 @@ public class PartidaModoSinFallos extends GestionPartida {
      * @return true si se acierta la pregunta, false si no
      */
     public boolean responder(Button boton) {
+        //se obtienen los colores que se le asignan a los botones
         int colorCorrecto = ContextCompat.getColor(context, R.color.color_correcto);
         int colorIncorrecto = ContextCompat.getColor(context, R.color.color_incorrecto);
+        //en caso de que se responda correctamente la pregunta
         if (boton.getText().toString().equals(pregunta.getRespuestaCorrecta())) {
             boton.setBackgroundColor(colorCorrecto);
             contadorPreguntasCorrectas++;
             return true;
-        } else {
+        }
+        //en caso de que se responda incorrectamente
+        else {
             contadorRespuestasIncorrectas++;
             boton.setBackgroundColor(colorIncorrecto);
+            //se pone de color verde el boton que contiene la respuesta correcta
             if (btnOpcion1.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion1.setBackgroundColor(colorCorrecto);
             }
@@ -155,6 +183,7 @@ public class PartidaModoSinFallos extends GestionPartida {
                 btnOpcion4.setBackgroundColor(colorCorrecto);
             }
             fallo = true;
+            Vibracion.vibrar(context,100);
             return false;
         }
     }

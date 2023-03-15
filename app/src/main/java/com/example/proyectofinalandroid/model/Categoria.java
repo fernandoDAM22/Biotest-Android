@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Clase modelo de la categoria.
  * La categoria de la preguna o cuestionario
+ *
  * @author Fernando
  */
 public class Categoria implements Serializable {
@@ -30,8 +31,9 @@ public class Categoria implements Serializable {
 
     /**
      * Constructor parametrizado
-     * @param id es el id de la categoria
-     * @param nombre es el nombre de categoria
+     *
+     * @param id          es el id de la categoria
+     * @param nombre      es el nombre de categoria
      * @param descripcion es la descripcion de la categoria, contiene una breve descripcion de
      *                    los contenidos que se van a tratar en las preguntas y cuestionarios que
      *                    pertenecen a ella

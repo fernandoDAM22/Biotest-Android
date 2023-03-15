@@ -15,7 +15,7 @@ public interface Constantes {
     String URL_INSERTAR_PARTIDA = SERVER + "admin/partidas/insertarPartida.php";
     String URL_INSERTAR_PREGUNTA_PARTIDA = SERVER + "admin/partidas/insertarPregunta.php";
     String URL_ESTABLECER_PUNTUACION = SERVER + "admin/partidas/establecerPuntuacion.php";
-    String URL_OBTENER_PREGUNTAS_PARTIDA = SERVER + "admin/obtenerPreguntasPartidas";
+    String URL_OBTENER_PREGUNTAS_PARTIDA = SERVER + "admin/partidas/obtenerPreguntasPartida.php";
     String URL_OBTENER_PUNTUACION = SERVER + "admin/categorias/obtenerPuntuacion";
 
     String URL_OBTENER_IDS = SERVER + "admin/preguntas/obtenerIds.php" ;
@@ -23,4 +23,6 @@ public interface Constantes {
 
     String URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO = SERVER + "admin/cuestionarios/obtenerIdPreguntas.php";
     String URL_OBTENER_ID_USUARIO = SERVER + "admin/usuarios/obtenerIdUsuario.php";
+    String URL_PREGUNTA_ACERTADA = SERVER + "admin/preguntas/preguntaAcertada.php";
+    String URL_OBTENER_ID = SERVER + "admin/preguntas/obtenerId.php";
 }

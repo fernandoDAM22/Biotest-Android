@@ -24,9 +24,23 @@ import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 import com.example.proyectofinalandroid.model.Partida;
 
+/**
+ * Esta clase permite al usuario jugar una partida en los diferentes modos de juego
+ *
+ * @author Fernando
+ */
 public class PantallaJugar extends AppCompatActivity {
+    /**
+     * Tipo de partida que se esta jugando
+     */
     TipoPartida tipoPartida;
+    /**
+     * Cuestionario que se resuelve en caso de que el modo elegido sea modo cuestionario
+     */
     String cuestionario;
+    /**
+     * Botones con las diferentes respuestas de la pregunta
+     */
     private Button btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4;
     /**
      * Partida modo libre por si el usuario decice jugar este tipo de partida
@@ -64,8 +78,14 @@ public class PantallaJugar extends AppCompatActivity {
      * Id del usuario que esta jugando la partida
      */
     private int idUsuario;
+    /**
+     * TextView para colocar la informacion en pantalla
+     */
     private TextView labelPregunta, labelRespuestasCorrectas, labelRespuestasIncorrectas;
-    private Button botonSiguiente, botonFinalizar;
+    /**
+     * Boton que permite finalizar una partida en caso de que el modo elegido sea modo libre
+     */
+    private Button botonFinalizar;
 
 
     @Override
@@ -84,6 +104,23 @@ public class PantallaJugar extends AppCompatActivity {
         jugar();
     }
 
+    /**
+     * Metodo obBackPressed sobreescrito para evitar que el usuario pueda atras
+     * usando el boton de retroceso del movil en mitad de una partida
+     * @author Fernando
+     */
+    @Override
+    public void onBackPressed() {
+        CrearToast.toastCorto("No se puede volver atras hasta que finalices la partida",getApplicationContext()).show();
+        Vibracion.vibrar(getApplicationContext(),100);
+    }
+
+    /**
+     * Este metodo se encarga de inicializar todas las variables con los
+     * elementos correspondientes del layout
+     *
+     * @author Fernando
+     */
     private void initComponents() {
         btnOpcion1 = findViewById(R.id.btnOpcion1);
         btnOpcion2 = findViewById(R.id.btnOpcion2);
@@ -92,7 +129,6 @@ public class PantallaJugar extends AppCompatActivity {
         labelPregunta = findViewById(R.id.txtEnunciado);
         labelRespuestasCorrectas = findViewById(R.id.txtRespuestasCorrectas);
         labelRespuestasIncorrectas = findViewById(R.id.txtRespuestasIncorrectas);
-        botonSiguiente = findViewById(R.id.btnSiguiente);
         botonFinalizar = findViewById(R.id.btnFinalizar);
         bandera = true;
     }
@@ -125,7 +161,9 @@ public class PantallaJugar extends AppCompatActivity {
     }
 
     /**
-     * Este metodo permite guardar el id de la partida y el id del usuario
+     * Este metodo permite guardar el id de la partida y el id del usuario,
+     * se guardan en variables globales porque sera necesario acceder a ellos
+     * desde otros metodos
      *
      * @author Fernando
      */
@@ -144,6 +182,9 @@ public class PantallaJugar extends AppCompatActivity {
         iniciarPartida();
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
+            //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
+            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
@@ -160,6 +201,9 @@ public class PantallaJugar extends AppCompatActivity {
         iniciarPartida();
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
+            //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
+            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
@@ -176,6 +220,9 @@ public class PantallaJugar extends AppCompatActivity {
         iniciarPartida();
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
+            //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
+            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
@@ -194,6 +241,9 @@ public class PantallaJugar extends AppCompatActivity {
         //nos aseguramos de que no hayan errores al obtener los datos
         iniciarPartida();
         if (idPartida == -1 || idUsuario == -1) {
+            //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
+            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
@@ -212,27 +262,31 @@ public class PantallaJugar extends AppCompatActivity {
 
         //en funcion del tipo de partida llamamos al metodo responder de la partida correspondiente
         switch (tipoPartida) {
-            case MODO_LIBRE :
+            case MODO_LIBRE:
                 responderModoLibre(view);
                 break;
-            case MODO_SIN_FALLOS :
+            case MODO_SIN_FALLOS:
                 responderModoSinFallos(view);
                 break;
-            case MODO_CLASICO :
+            case MODO_CLASICO:
                 responderModoClasico(view);
                 break;
-            case CUESTIONARIOS :
+            case CUESTIONARIOS:
                 responderCuestionario(view);
                 break;
         }
-    }/**
+    }
+
+    /**
      * Este metodo permite responder una pregunta en una partida de modo clasico
+     *
      * @param view es el boton que se pulsa
      * @author Fernando
      */
     private void responderModoClasico(View view) {
-        //nos aseguramos de que la partida no esta respondida ya
+        //nos aseguramos de que la pregunta no esta respondida ya
         if (bandera) {
+            //obtenemos el boton
             Button button = (Button) view;
             boolean acertada = partidaModoClasico.responder(button);
             //se marca que la pregunta ya ha sido respondida
@@ -241,16 +295,23 @@ public class PantallaJugar extends AppCompatActivity {
             labelRespuestasCorrectas.setText("Respuestas correctas: " + partidaModoClasico.getContadorPreguntasCorrectas());
             labelRespuestasIncorrectas.setText("Respuestas incorrectas: " + partidaModoClasico.getContadorRespuestasIncorrectas());
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
+        } else {
+            //indicamos al usuario que esa pregunta ya esta respondida
+            CrearToast.toastLargo("Ya has respondido a la pregunta", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
+
     /**
      * Este metodo permite responder una pregunta en una partida de modo sin fallos
+     *
      * @param view es el boton que se pulsa
      * @author Fernando
      */
     private void responderModoSinFallos(View view) {
-        //nos aseguramos de que la partida no esta respondida ya
+        //nos aseguramos de que la pregunta no esta respondida ya
         if (bandera) {
+            //obtenemos el boton
             Button button = (Button) view;
             boolean acertada = partidaModoSinFallos.responder(button);
             //se marca que la pregunta ya ha sido respondida
@@ -259,6 +320,10 @@ public class PantallaJugar extends AppCompatActivity {
             labelRespuestasCorrectas.setText("Respuestas correctas: " + partidaModoSinFallos.getContadorPreguntasCorrectas());
             labelRespuestasIncorrectas.setText("Respuestas incorrectas: " + partidaModoSinFallos.getContadorRespuestasIncorrectas());
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
+        } else {
+            //indicamos al usuario que esa pregunta ya esta respondida
+            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
 
@@ -270,6 +335,7 @@ public class PantallaJugar extends AppCompatActivity {
     private void responderModoLibre(View view) {
         //solo se permite pulsar un boton, hasta que se coloque otra pregunta
         if (bandera) {
+            //obtenemos el boton
             Button button = (Button) view;
             boolean acertada = partidaModoLibre.responder(button);
             //se marca que la pregunta ya ha sido respondida
@@ -278,11 +344,17 @@ public class PantallaJugar extends AppCompatActivity {
             labelRespuestasCorrectas.setText("Respuestas correctas: " + partidaModoLibre.getContadorPreguntasCorrectas());
             labelRespuestasIncorrectas.setText("Respuestas incorrectas: " + partidaModoLibre.getContadorRespuestasIncorrectas());
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
+        } else {
+            //indicamos al usuario que esa pregunta ya esta respondida
+            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
-    private void responderCuestionario(View view){
+
+    private void responderCuestionario(View view) {
         //nos aseguramos de que la pregunta no ha sido respondida ya
-        if(bandera){
+        if (bandera) {
+            //obtenemos el boton
             Button button = (Button) view;
             boolean acertada = partidaCuestionario.responder(button);
             //se marca que la pregunta ya ha sido respondida
@@ -291,14 +363,18 @@ public class PantallaJugar extends AppCompatActivity {
             labelRespuestasCorrectas.setText("Respuestas correctas: " + partidaCuestionario.getContadorPreguntasCorrectas());
             labelRespuestasIncorrectas.setText("Respuestas incorrectas: " + partidaCuestionario.getContadorRespuestasIncorrectas());
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
+        } else {
+            //indicamos al usuario que esa pregunta ya esta respondida
+            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
 
     public void siguiente(View view) {
         //nos aseguramos de que la pregunta no ha sido ya respondida
         if (bandera) {
-            CrearToast.crearToast("Debe responder a la pregunta antes de pasar a la siguiente",getApplicationContext()).show();
-            Vibracion.vibrar(getApplicationContext(),100);
+            CrearToast.toastCorto("Debe responder a la pregunta antes de pasar a la siguiente", getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
         //en funcion del tipo de partida se llama al metodo ciclo de la partida correspondiente
@@ -328,45 +404,64 @@ public class PantallaJugar extends AppCompatActivity {
                 }
                 break;
             case CUESTIONARIOS:
-                if(partidaCuestionario.fin()){
+                if (partidaCuestionario.fin()) {
                     bandera = true;
                     idPregunta = partidaCuestionario.ciclo();
-                }else {
+                } else {
                     lanzarVentanaResultado();
                 }
                 break;
         }
     }
+
     /**
      * Este metodo permite lanzar la ventana de resultado
+     *
      * @author Fernando
      */
     private void lanzarVentanaResultado() {
         colocarPuntuacion();
-        Intent intent = new Intent(this,PantallaResultado.class);
+        Intent intent = new Intent(this, PantallaResultado.class);
+        //mandamos el id de la partida hacia la pantalla donde se muestra el resultado
+        intent.putExtra("id_partida",idPartida);
         startActivity(intent);
     }
+
+    /**
+     * Este metodo permite colocar la puntuacion de la partida una vez terminada
+     * @author Fernando
+     */
     private void colocarPuntuacion() {
         int puntuacion = 0;
         //obtenemos la puntuacion en funcion de la partida que se ha jugado
         switch (tipoPartida) {
-            case MODO_LIBRE :
+            case MODO_LIBRE:
                 puntuacion = partidaModoLibre.getContadorPreguntasCorrectas();
                 break;
-            case MODO_SIN_FALLOS :
+            case MODO_SIN_FALLOS:
                 puntuacion = partidaModoSinFallos.getContadorPreguntasCorrectas();
                 break;
-            case MODO_CLASICO :
+            case MODO_CLASICO:
                 puntuacion = partidaModoClasico.getContadorPreguntasCorrectas();
                 break;
-            case CUESTIONARIOS :
+            case CUESTIONARIOS:
                 puntuacion = partidaCuestionario.getContadorPreguntasCorrectas();
                 break;
-        };
+        }
+        ;
         //realizamos una consulta de modificacion para colocar la puntuacion
         ConsultasPartida.establecerPuntuacion(partida.getId(), puntuacion);
     }
-    public void finalizar(View view){
+
+    /**
+     * Este metodo permite finalizar una partida en caso de que el modo
+     * de juego sea modo libre, cuenta con doble verificacion, para terminar
+     * una partida es necesario pulsar el boton de aceptar del dialogo que
+     * se nos mostrara una vez pulsado el boton de finalizar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
+    public void finalizar(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Está seguro de que desea finalizar?");
         builder.setPositiveButton("Aceptar", (dialog, which) -> lanzarVentanaResultado());

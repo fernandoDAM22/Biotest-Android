@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
 import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
+import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
 
@@ -28,15 +29,33 @@ public class PartidaModoClasico extends GestionPartida {
      * Contienen los ids de todas las preguntas de la base de datos
      */
     private ArrayList<Integer> idPreguntas;
-
+    /**
+     * Objeto pregunta
+     */
     Pregunta pregunta;
+    /**
+     * contador de las respuestas correctas que llevamos en la partida
+     */
     private int contadorPreguntasCorrectas;
     /**
      * Es el contador de las preguntas incorrectas en la partida
      */
     private int contadorRespuestasIncorrectas;
+    /**
+     * Es el contexto de la aplicacion
+     */
     Context context;
 
+    /**
+     * Constructor con parametros
+     * @param partida objeto de la clase partida
+     * @param btnOpcion1 boton para la primera respuesta de la pregunta
+     * @param btnOpcion2 boton para la segunda respuesta de la pregunta
+     * @param btnOpcion3 boton para la tercera  respuesta de la pregunta
+     * @param btnOpcion4 boton para la cuarta respuesta de la pregunta
+     * @param enunciado TextView para el enunciado de la pregunta
+     * @param context contexto de la aplicacion
+     */
     public PartidaModoClasico(Partida partida, Button btnOpcion1, Button btnOpcion2, Button btnOpcion3, Button btnOpcion4, TextView enunciado, Context context) {
         super(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, enunciado);
         this.context = context;
@@ -48,7 +67,8 @@ public class PartidaModoClasico extends GestionPartida {
     }
 
     /**
-     * Este metodo permite seleccionar una pregunta
+     * Este metodo permite seleccionar una pregunta, selecciona 10 preguntas diferentes,
+     * esto permite que no se respondan preguntas repetidas en la misma partida
      *
      * @author Fernando
      */
@@ -121,15 +141,20 @@ public class PartidaModoClasico extends GestionPartida {
      * @author Fernando
      */
     public boolean responder(Button boton) {
+        //se obtienen los colores para los botones
         int colorCorrecto = ContextCompat.getColor(context, R.color.color_correcto);
         int colorIncorrecto = ContextCompat.getColor(context, R.color.color_incorrecto);
+        //en caso de que se responda correctamente la pregunta
         if (boton.getText().toString().equals(pregunta.getRespuestaCorrecta())) {
             boton.setBackgroundColor(colorCorrecto);
             contadorPreguntasCorrectas++;
             return true;
-        } else {
+        }
+        //en caso de que se responda incorrectamente
+        else {
             contadorRespuestasIncorrectas++;
             boton.setBackgroundColor(colorIncorrecto);
+            //se pone de color verde el boton que contiene la respuesta correcta
             if (btnOpcion1.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion1.setBackgroundColor(colorCorrecto);
             }
@@ -142,6 +167,7 @@ public class PartidaModoClasico extends GestionPartida {
             if (btnOpcion4.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion4.setBackgroundColor(colorCorrecto);
             }
+            Vibracion.vibrar(context,100);
             return false;
         }
     }

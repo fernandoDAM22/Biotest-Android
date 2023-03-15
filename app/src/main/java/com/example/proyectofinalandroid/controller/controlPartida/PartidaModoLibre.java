@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
 import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
+import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
 
@@ -42,9 +43,26 @@ public class PartidaModoLibre extends GestionPartida {
      * Es el contador de las preguntas incorrectas en la partida
      */
     private int contadorRespuestasIncorrectas = 0;
+    /**
+     * Numero de preguntas que se van respondiendo en la partida
+     */
     int numeroPreguntas = 0;
+    /**
+     * Es el contexto de la aplicacion
+     */
     Context context;
 
+    /**
+     * Constructor con parametros
+     * @param partida objeto de la clase partida
+     * @param btnOpcion1 boton para la primera respuesta de la pregunta
+     * @param btnOpcion2 boton para la segunda respuesta de la pregunta
+     * @param btnOpcion3 boton para la tercera respuesta de la pregunta
+     * @param btnOpcion4 boton para la cuarta respuesta de la pregunta
+     * @param enunciado TextView para el enunciado de la pregunta
+     * @param context contexto de la aplicacion
+     * @author Fernando
+     */
     public PartidaModoLibre(Partida partida, Button btnOpcion1, Button btnOpcion2, Button btnOpcion3, Button btnOpcion4, TextView enunciado,Context context) {
         super(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, enunciado);
         this.context = context;
@@ -54,7 +72,8 @@ public class PartidaModoLibre extends GestionPartida {
     }
 
     /**
-     * Este metodo permite seleccionar una pregunta
+     * Este metodo permite seleccionar una pregunta, cada vez que se ejecuta selecciona una
+     * pregunta diferente, esto permite que no se respondan preguntas repetidas en la misma partida
      * @author Fernando
      */
     public void seleccionarPregunta() {
@@ -119,15 +138,20 @@ public class PartidaModoLibre extends GestionPartida {
      * @return true si se acierta la pregunta, false si no
      */
     public boolean responder(Button boton) {
+        //se obtenienen los colores que se le asignan a los botones
         int colorCorrecto = ContextCompat.getColor(context, R.color.color_correcto);
         int colorIncorrecto = ContextCompat.getColor(context, R.color.color_incorrecto);
+        //en caso de que se responda correctamente la pregunta
         if (boton.getText().toString().equals(pregunta.getRespuestaCorrecta())) {
             boton.setBackgroundColor(colorCorrecto);
             contadorPreguntasCorrectas++;
             return true;
-        } else {
+        }
+        //en caso de que se responda incorrectamente la pregunta
+        else {
             contadorRespuestasIncorrectas++;
             boton.setBackgroundColor(colorIncorrecto);
+            //se pone de color verda la respuesta correcta
             if (btnOpcion1.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion1.setBackgroundColor(colorCorrecto);
             }
@@ -140,6 +164,7 @@ public class PartidaModoLibre extends GestionPartida {
             if (btnOpcion4.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion4.setBackgroundColor(colorCorrecto);
             }
+            Vibracion.vibrar(context,100);
             return false;
         }
     }

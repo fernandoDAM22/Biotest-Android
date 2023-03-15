@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements Codigos {
             }
             //mostramos el mensaje de error en caso de que haya ocurrido
             if(resultado < 0){
-                CrearToast.crearToast(mensaje,getApplicationContext()).show();
+                CrearToast.toastLargo(mensaje,getApplicationContext()).show();
                 Vibracion.vibrar(getApplicationContext(),100);
                 return;
             }

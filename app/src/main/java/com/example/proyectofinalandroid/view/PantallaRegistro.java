@@ -106,7 +106,7 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
                         break;
                 }
                 //mostramos el toast con el mensaje correspondiente
-                CrearToast.crearToast(mensaje, getApplicationContext()).show();
+                CrearToast.toastLargo(mensaje, getApplicationContext()).show();
                 //si el codigo es negativo es un error, si no es correcto
                 if (estado > 0) {
                     //en caso de ser correcto simplemente cerramos la actividad para volver a la pantalla de login

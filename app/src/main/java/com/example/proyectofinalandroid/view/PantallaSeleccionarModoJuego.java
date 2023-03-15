@@ -184,7 +184,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         ToggleButton boton = obtenerBotonSeleccionado(findViewById(R.id.grupoBotones));
         //en caso de que sea nulo
         if(boton == null){
-            CrearToast.crearToast("No has seleccionado ningun boton",getApplicationContext()).show();
+            CrearToast.toastLargo("No has seleccionado ningun boton",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
@@ -215,7 +215,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         }
 
         if (cuestionarios == null || cuestionarios.isEmpty()) {
-            CrearToast.crearToast("No hay cuestionarios disponibles",getApplicationContext()).show();
+            CrearToast.toastLargo("No hay cuestionarios disponibles",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }

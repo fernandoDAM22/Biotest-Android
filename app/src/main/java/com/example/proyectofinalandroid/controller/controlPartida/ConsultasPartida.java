@@ -40,7 +40,9 @@ public class ConsultasPartida {
     public static ArrayList<Integer> obtenerId() {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<ArrayList<Integer>> future = executor.submit(() -> {
+            //obtenemos la respuesta
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PARTIDAS,new HashMap<>());
+            //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {
                 ArrayList<Integer> list = new ArrayList<>();
@@ -48,13 +50,16 @@ public class ConsultasPartida {
                 for (JsonElement jsonElement : jsonArray) {
                     list.add(jsonElement.getAsInt());
                 }
+                //retornamos la lista con los ids
                 return list;
             } else {
                 return null;
             }
         });
         try {
+            //terminamos el executor
             executor.shutdown();
+            //retornamos el valor devuelto por el future, es decir la lista de ids
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -70,19 +75,24 @@ public class ConsultasPartida {
     public static boolean insertarPartida(Partida partida) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los datos que tenemos que pasar el la peticion
             HashMap<String,String> data = new HashMap<>();
             data.put("id", String.valueOf(partida.getId()));
             data.put("puntuacion", String.valueOf(partida.getPuntuacion()));
             data.put("id_usuario", String.valueOf(partida.getIdUsuario()));
             data.put("tipo_partida",partida.getTipo());
+            //obtenemos la respuesta
             String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_PARTIDA,data);
-            System.out.println(respuesta);
+            //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
+            //retornamos la respuesta en formato booleano
             return element.getAsBoolean();
         });
 
         try {
+            //terminamos el executor
             executor.shutdown();
+            //devolvemos la respuesta del future, es decir un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -100,18 +110,23 @@ public class ConsultasPartida {
      */
     public static boolean insertarPregunta(int idPartida, int idPregunta, boolean acertada) {
         ExecutorService executor = Executors.newCachedThreadPool();
-
         Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los datos que tenemos que enviar en la peticion
             HashMap<String,String> data = new HashMap<>();
             data.put("id_partida", String.valueOf(idPartida));
             data.put("id_pregunta",String.valueOf(idPregunta));
             data.put("acertada",String.valueOf(acertada));
+            //obtenemos la respuesta
             String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_PREGUNTA_PARTIDA,data);
+            //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
+            //devolvemos la respuesta en formato booleano
             return element.getAsBoolean();
         });
         try {
+            //terminamos el executor
             executor.shutdown();
+            //retornamos el resultado devuelto por el future, es decir un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -128,15 +143,21 @@ public class ConsultasPartida {
     public static boolean establecerPuntuacion(int idPartida, int puntuacion) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los parametros necesarios
             HashMap<String,String> data = new HashMap<>();
             data.put("id_partida", String.valueOf(idPartida));
             data.put("puntuacion",String.valueOf(puntuacion));
+            //obtenemos la respuesta
             String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_ESTABLECER_PUNTUACION,data);
+            //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
+            //la devolvemos en formato boolean
             return element.getAsBoolean();
         });
         try {
+            //terminamos el executor
             executor.shutdown();
+            //retornamos el resultado devuelto por el future, es decir, un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -154,21 +175,27 @@ public class ConsultasPartida {
     public static ArrayList<String[]> obtenerPreguntasPartida(int idPartida) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<ArrayList<String[]>> future = executor.submit(() -> {
+            //creamos un mapa con los valores necesarios
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
+            //obtenemos la respuessta
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
-
+            System.err.println(respuesta);
+            //la parseamos
             Gson gson = new Gson();
             List<String[]> listaPreguntas = gson.fromJson(respuesta, new TypeToken<List<String[]>>(){}.getType());
-
+            //añadimos los datos de las preguntas a un ArrayList
             ArrayList<String[]> preguntas = new ArrayList<>();
             for (String[] pregunta : listaPreguntas) {
                 preguntas.add(new String[]{pregunta[0],pregunta[1],pregunta[2],pregunta[3],pregunta[4]});
             }
+            //retornamos el ArrayList con los datos de las preguntas
             return preguntas;
         });
         try {
+            //terminamos el executor
             executor.shutdown();
+            //devolvemos el resultado devuelto por el executor
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -184,15 +211,21 @@ public class ConsultasPartida {
     public static int obtenerPuntuacion(int idPartida) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<Integer> future = executor.submit(() -> {
+            //creamos el mapa con los parametros necesarios
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
+            //obtenemos la respuesta
             String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PUNTUACION,data);
+            //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             String result = element.toString().replaceAll("\"","");
+            //la devolvemos como entero
             return Integer.parseInt(result);
         });
         try {
+            //terminamos el executor
             executor.shutdown();
+            //retornamos la respuesta devuelta por el future, es decir un numero entero
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
