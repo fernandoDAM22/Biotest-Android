@@ -1,6 +1,5 @@
 package com.example.proyectofinalandroid.controller.baseDeDatos;
 
-import com.example.proyectofinalandroid.controller.acceso.Registro;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -8,9 +7,7 @@ import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -30,7 +27,7 @@ public class GestionCuestionarios {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<ArrayList<String>> future = executor.submit(() -> {
             //obtenemos la respuesta
-            String response = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_CUESTIONARIOS_COMPLETOS, new HashMap<>());
+            String response = HttpRequest.getRequest(Constantes.URL_OBTENER_CUESTIONARIOS_COMPLETOS, new HashMap<>());
             //la parseamos
             JsonArray jsonArray = new Gson().fromJson(response, JsonArray.class);
             ArrayList<String> data = new ArrayList<>();
@@ -59,7 +56,7 @@ public class GestionCuestionarios {
             HashMap<String,String> data = new HashMap<>();
             data.put("nombre",cuestionario);
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO,data);
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_IDS_PREGUNTAS_CUESTIONARIO,data);
             //parseamos la respuesta
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {

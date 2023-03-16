@@ -1,7 +1,6 @@
 package com.example.proyectofinalandroid.controller.controlPartida;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
-import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.model.Partida;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -9,19 +8,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
 
 
 /**
@@ -41,7 +34,7 @@ public class ConsultasPartida {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<ArrayList<Integer>> future = executor.submit(() -> {
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS_PARTIDAS,new HashMap<>());
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_IDS_PARTIDAS,new HashMap<>());
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {
@@ -70,6 +63,7 @@ public class ConsultasPartida {
      * Este metodo permite insertar una partida en la base de datos
      *
      * @param partida es el objeto de la clase partida que contiene los datos
+     * @return true si se inserta, false si no
      * @author Fernando
      */
     public static boolean insertarPartida(Partida partida) {
@@ -82,7 +76,7 @@ public class ConsultasPartida {
             data.put("id_usuario", String.valueOf(partida.getIdUsuario()));
             data.put("tipo_partida",partida.getTipo());
             //obtenemos la respuesta
-            String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_PARTIDA,data);
+            String respuesta = HttpRequest.postRequest(Constantes.URL_INSERTAR_PARTIDA,data);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //retornamos la respuesta en formato booleano
@@ -117,7 +111,7 @@ public class ConsultasPartida {
             data.put("id_pregunta",String.valueOf(idPregunta));
             data.put("acertada",String.valueOf(acertada));
             //obtenemos la respuesta
-            String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_PREGUNTA_PARTIDA,data);
+            String respuesta = HttpRequest.postRequest(Constantes.URL_INSERTAR_PREGUNTA_PARTIDA,data);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //devolvemos la respuesta en formato booleano
@@ -148,7 +142,7 @@ public class ConsultasPartida {
             data.put("id_partida", String.valueOf(idPartida));
             data.put("puntuacion",String.valueOf(puntuacion));
             //obtenemos la respuesta
-            String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_ESTABLECER_PUNTUACION,data);
+            String respuesta = HttpRequest.postRequest(Constantes.URL_ESTABLECER_PUNTUACION,data);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //la devolvemos en formato boolean
@@ -179,7 +173,7 @@ public class ConsultasPartida {
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
             //obtenemos la respuessta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
             System.err.println(respuesta);
             //la parseamos
             Gson gson = new Gson();
@@ -215,7 +209,8 @@ public class ConsultasPartida {
             HashMap<String,String> data = new HashMap<>();
             data.put("partida",String.valueOf(idPartida));
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_PUNTUACION,data);
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PUNTUACION,data);
+            System.err.println("Respuesta ------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             String result = element.toString().replaceAll("\"","");

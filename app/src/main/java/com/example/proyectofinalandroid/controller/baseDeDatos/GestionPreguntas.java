@@ -4,18 +4,11 @@ import com.example.proyectofinalandroid.model.Pregunta;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -36,7 +29,7 @@ public class GestionPreguntas {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<ArrayList<Integer>> future = executor.submit(() -> {
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_IDS, new HashMap<>());
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_IDS, new HashMap<>());
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             if (element.isJsonArray()) {
@@ -76,7 +69,7 @@ public class GestionPreguntas {
             HashMap<String, String> data = new HashMap<>();
             data.put("id", String.valueOf(id));
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(url, data);
+            String respuesta = HttpRequest.getRequest(url, data);
             //la parseamos
             Gson gson = new Gson();
             String[] pregunta = gson.fromJson(respuesta, String[].class);
@@ -95,20 +88,26 @@ public class GestionPreguntas {
         }
     }
 
+    /**
+     * Este metodo permite saber si una pregunta fue acertada o no en una partida
+     * @param idPartida es el id de la partida en la que se respondio la pregunta
+     * @param idPregunta es el id de la pregunta que se respondio
+     * @return true si fue acertada, false si no
+     * @author Fernando
+     */
     public static boolean preguntaAcertada(int idPartida, int idPregunta) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los parametros necesarios
             HashMap<String, String> params = new HashMap<>();
             params.put("idPartida", String.valueOf(idPartida));
             params.put("idPregunta", String.valueOf(idPregunta));
-            System.out.println("idPartida --------------> " + idPartida);
-            System.out.println("idPregunta --------------> " + idPregunta);
-
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_PREGUNTA_ACERTADA, params);
-            System.out.println("Respuesta --------------> " + respuesta);
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(respuesta);
-            String result = element.toString().replaceAll("\"", "").replace("[","").replace("]","");
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.getRequest(Constantes.URL_PREGUNTA_ACERTADA, params);
+            JsonElement element = JsonParser.parseString(respuesta);
+            //la parseamos
+            String result = element.toString().replaceAll("\"","").replace("[","").replace("]","");
+            //retornamos true si fue acertada, false si no
             return Integer.parseInt(result) != 0;
         });
         try {
@@ -121,16 +120,23 @@ public class GestionPreguntas {
         }
     }
 
+    /**
+     * Este metodo permite obtener el id de una pregunta a partir de su enunciado
+     * @param enunciado es el enunciado de la pregunta de la cual queremos obtener su id
+     * @return el id de la pregunta, -1 si ocurre algun error
+     */
     public static int obtenerIdPregunta(String enunciado) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Integer> future = executor.submit(() -> {
             try {
+                //creamos el mapa con los parametros necesarios
                 HashMap<String, String> data = new HashMap<>();
                 data.put("enunciado", enunciado);
-                String response = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_ID, data);
-                JsonParser parser = new JsonParser();
-                JsonElement element = parser.parse(response);
-                String result = element.toString().replaceAll("\"", "");
+                //obtenemos la respuesta
+                String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_ID, data);
+                //la parseamos
+                JsonElement element = JsonParser.parseString(respuesta);
+                String result = element.toString().replaceAll("\"","");
                 return Integer.parseInt(result);
             } catch (Exception e) {
                 return -1;

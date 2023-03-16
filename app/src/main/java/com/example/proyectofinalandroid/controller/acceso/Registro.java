@@ -81,7 +81,7 @@ public class Registro implements Codigos {
         params.put("password", usuario.getPassword());
         params.put("tipo", usuario.getTipo());
         //realizamos la peticion y obtenemos la respuesta
-        String respuesta = HttpRequest.POST_REQUEST(Constantes.URL_REGISTRO, params);
+        String respuesta = HttpRequest.postRequest(Constantes.URL_REGISTRO, params);
         //parseamos la respuesta y la devolvemos como booleano
         JsonElement element = JsonParser.parseString(respuesta);
         return element.getAsBoolean();

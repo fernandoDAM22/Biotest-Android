@@ -10,7 +10,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Esta clase permite que el usuario se registre en el sistema
@@ -53,7 +52,7 @@ public class Login implements Codigos {
         //añadimos el nombre el mapa
         params.put("nombre",nombre);
         //hacemos la peticion y guardamos la respuesta
-        String jsonResultado = HttpRequest.GET_REQUEST(url, params);
+        String jsonResultado = HttpRequest.getRequest(url, params);
         //parseamos la respuesta
         Gson gson = new Gson();
         JsonElement jsonElement = gson.fromJson(jsonResultado, JsonElement.class);

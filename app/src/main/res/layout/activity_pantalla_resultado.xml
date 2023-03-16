@@ -45,6 +45,7 @@
 
     <Button
         android:id="@+id/btnMenuPrincipal"
+        android:onClick="volverMenuPrincipal"
         android:layout_width="157dp"
         android:layout_height="70dp"
         android:layout_marginTop="111dp"
@@ -59,6 +60,7 @@
 
     <Button
         android:id="@+id/btnSalir"
+        android:onClick="salir"
         android:layout_width="157dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"

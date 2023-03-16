@@ -1,7 +1,5 @@
 package com.example.proyectofinalandroid.controller.tools;
 
-import android.os.AsyncTask;
-
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
@@ -9,12 +7,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.util.HashMap;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * Esta clase permite comprobar que los datos introducidos por
@@ -97,7 +89,7 @@ public class ComprobarDatos implements Patrones {
         //añadimos el nombre al mapa
         params.put("nombre", nombre);
         //obtenemos la respuesta
-        String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_EXISTE_USUARIO, params);
+        String respuesta = HttpRequest.getRequest(Constantes.URL_EXISTE_USUARIO, params);
         //parseamos la respuesta
         JsonElement element = JsonParser.parseString(respuesta);
         //devolvemos un resutado en funcion de lo ocurrido

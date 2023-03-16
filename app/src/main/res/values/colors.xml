@@ -16,4 +16,6 @@
     <color name="color_fondo_pantallas">#3C3F41</color>
     <color name="color_correcto">#2ECC71</color>
     <color name="color_incorrecto">#E74C3C</color>
+    <color name="color_preguntas_acertadas">#A5FFD6</color>
+    <color name="color_preguntas_falladas">#FF686B</color>
 </resources>

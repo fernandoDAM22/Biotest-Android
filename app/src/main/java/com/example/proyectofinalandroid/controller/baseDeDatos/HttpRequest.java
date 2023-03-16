@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Map;
 
 /**
@@ -25,7 +24,7 @@ public class HttpRequest {
      * @return el resultado de la peticion
      * @author Fernando
      */
-    public static String POST_REQUEST(String url, Map<String, String> params) {
+    public static String postRequest(String url, Map<String, String> params) {
         try {
             Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -70,7 +69,7 @@ public class HttpRequest {
      * @return el resultado de la peticion
      * @author Fernando
      */
-    public static String GET_REQUEST(String url, Map<String, String> params) {
+    public static String getRequest(String url, Map<String, String> params) {
         try {
             Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
             for (Map.Entry<String, String> entry : params.entrySet()) {

@@ -1,13 +1,10 @@
 package com.example.proyectofinalandroid.controller.baseDeDatos;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -29,7 +26,7 @@ public class GestionUsuarios {
             HashMap<String,String> data = new HashMap<>();
             data.put("nombre",nombreUsuario);
             //obtenemos la respuesta
-            String respuesta = HttpRequest.GET_REQUEST(Constantes.URL_OBTENER_ID_USUARIO,data);
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_ID_USUARIO,data);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             String result = element.toString().replaceAll("\"","");
