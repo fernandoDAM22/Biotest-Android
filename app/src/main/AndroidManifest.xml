@@ -17,6 +17,35 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.PantallaCambiarTelefono"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.PantallaCambiarNombreUsuario"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.PantallaCambiarEmail"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".view.PantallaSeleccionarModoJuego"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.PantallaResultado"
             android:exported="false">
             <meta-data
@@ -38,7 +67,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.PantallaSeleccionarModoJuego"
+            android:name=".view.PantallaCambiarPassword"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

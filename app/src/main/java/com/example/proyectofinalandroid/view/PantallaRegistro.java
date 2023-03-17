@@ -54,7 +54,7 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
         txtPassword = findViewById(R.id.txtPassword);
         txtPassword2 = findViewById(R.id.txtPassword2);
         txtEmail = findViewById(R.id.txtEmail);
-        txtTelefono = findViewById(R.id.txtTelefono);
+        txtTelefono = findViewById(R.id.txtTelefonoActual);
     }
 
     /**

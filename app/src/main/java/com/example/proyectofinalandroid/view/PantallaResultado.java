@@ -76,6 +76,7 @@ public class PantallaResultado extends AppCompatActivity {
         txtPuntuacion.setText("Puntuacion: " + ConsultasPartida.obtenerPuntuacion(idPartida));
     }
 
+
     /**
      * Metodo onBackPressed sobreescrito para poder personalizar la accion
      * al momento de pulsar el boton de retroceso, para salir sera necesario

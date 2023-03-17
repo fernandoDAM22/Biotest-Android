@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Seleccionar modo de juego"
+        android:id="@+id/item_modo_juego"
+        />
+    <item
+        android:title="Ajustes de usuario"
+        android:id="@+id/item_ajustes_usuario">
+        <menu>
+            <item android:id="@+id/item_cambiar_password"
+                android:title="Cambiar contraseña" />
+            <item android:id="@+id/item_cambiar_usuario"
+                android:title="Cambiar nombre de usuario" />
+            <item android:id="@+id/item_cambiar_telefono"
+                android:title="Cambiar telefono" />
+            <item android:id="@+id/item_cambiar_email"
+                android:title="Cambiar email" />
+        </menu>
+
+    </item>
+    <item
+        android:title="Cerrar sesion"
+        android:id="@+id/item_cerrar_sesion"
+        />
+</menu>
