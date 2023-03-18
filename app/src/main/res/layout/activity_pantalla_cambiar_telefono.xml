@@ -27,6 +27,7 @@
 
     <Button
         android:id="@+id/btnCancelarTelefono"
+        android:onClick="btnCancelarOnClik"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginStart="21dp"

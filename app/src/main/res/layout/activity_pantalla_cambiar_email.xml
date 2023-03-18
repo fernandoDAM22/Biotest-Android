@@ -27,6 +27,7 @@
 
     <Button
         android:id="@+id/btnCancelarEmail"
+        android:onClick="btnCancelarOnClick"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginStart="21dp"

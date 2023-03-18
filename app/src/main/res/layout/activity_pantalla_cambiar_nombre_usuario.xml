@@ -9,6 +9,7 @@
 
     <Button
         android:id="@+id/btnCancelarUsername"
+        android:onClick="btnCancelarOnClick"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginStart="10dp"
