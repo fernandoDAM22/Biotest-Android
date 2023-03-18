@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,7 @@ public class PantallaJugar extends AppCompatActivity {
      * Boton que permite finalizar una partida en caso de que el modo elegido sea modo libre
      */
     private Button botonFinalizar;
+    private Button botonSiguiente;
 
 
     @Override
@@ -131,6 +133,7 @@ public class PantallaJugar extends AppCompatActivity {
         labelRespuestasCorrectas = findViewById(R.id.txtRespuestasCorrectas);
         labelRespuestasIncorrectas = findViewById(R.id.txtRespuestasIncorrectas);
         botonFinalizar = findViewById(R.id.btnFinalizar);
+        botonSiguiente = findViewById(R.id.btnSiguiente);
         bandera = true;
     }
 
@@ -143,6 +146,11 @@ public class PantallaJugar extends AppCompatActivity {
         if (tipoPartida != TipoPartida.MODO_LIBRE) {
             LinearLayout layout = findViewById(R.id.layoutBotones);
             layout.removeView(botonFinalizar);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, // Ancho MATCH_PARENT
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()) // Altura en 70dp
+            );
+            botonSiguiente.setLayoutParams(params);
         }
         //se inicia la partida en funcion del tipo de partida elegido
         switch (tipoPartida) {

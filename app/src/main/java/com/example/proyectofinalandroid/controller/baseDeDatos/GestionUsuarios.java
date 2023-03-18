@@ -42,4 +42,108 @@ public class GestionUsuarios {
             return -1;
         }
     }
+
+    public static boolean cambiarPassword(String usuario, String password) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los valores necesarios
+            HashMap<String,String> data = new HashMap<>();
+            data.put("nombre",usuario);
+            data.put("password",password);
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_PASSWORD,data);
+            System.err.println("Respuesta ---------------> " + respuesta);
+            //la parseamos
+            JsonElement element = JsonParser.parseString(respuesta);
+            //retornamos la respuesta como entero
+            return element.getAsBoolean();
+
+        });
+        try {
+            //terminamos el executor y delvolvemos el resultado del future, es decir un numero entero
+            executor.shutdown();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean modificarNombre(String nombreAntiguo, String nombreNuevo) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los valores necesarios
+            HashMap<String,String> data = new HashMap<>();
+            data.put("nombreAntiguo",nombreAntiguo);
+            data.put("nombreNuevo",nombreNuevo);
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_USUARIO,data);
+            System.err.println("Respuesta ---------------> " + respuesta);
+            //la parseamos
+            JsonElement element = JsonParser.parseString(respuesta);
+            //retornamos la respuesta como entero
+            return element.getAsBoolean();
+
+        });
+        try {
+            //terminamos el executor y delvolvemos el resultado del future, es decir un numero entero
+            executor.shutdown();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean cambiarEmail(String nombre, String email) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los valores necesarios
+            HashMap<String,String> data = new HashMap<>();
+            data.put("nombre",nombre);
+            data.put("email",email);
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_EMAIL,data);
+            System.err.println("Respuesta ---------------> " + respuesta);
+            //la parseamos
+            JsonElement element = JsonParser.parseString(respuesta);
+            //retornamos la respuesta como entero
+            return element.getAsBoolean();
+
+        });
+        try {
+            //terminamos el executor y delvolvemos el resultado del future, es decir un numero entero
+            executor.shutdown();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean cambiarTelefono(String nombre, String telefono) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Boolean> future = executor.submit(() -> {
+            //creamos el mapa con los valores necesarios
+            HashMap<String,String> data = new HashMap<>();
+            data.put("nombre",nombre);
+            data.put("telefono",telefono);
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_TELEFONO,data);
+            System.err.println("Respuesta ---------------> " + respuesta);
+            //la parseamos
+            JsonElement element = JsonParser.parseString(respuesta);
+            //retornamos la respuesta como entero
+            return element.getAsBoolean();
+
+        });
+        try {
+            //terminamos el executor y delvolvemos el resultado del future, es decir un numero entero
+            executor.shutdown();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

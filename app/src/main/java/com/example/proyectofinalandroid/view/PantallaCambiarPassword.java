@@ -6,9 +6,19 @@ import androidx.core.content.ContextCompat;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.proyectofinalandroid.R;
+import com.example.proyectofinalandroid.controller.acceso.Codigos;
+import com.example.proyectofinalandroid.controller.acceso.Login;
+import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
+import com.example.proyectofinalandroid.controller.tools.Cifrado;
+import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
+import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Vibracion;
+import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
 /**
  * Este clase pinta la pantalla que permite al usuario cambiar su contrasena
@@ -43,6 +53,43 @@ public class PantallaCambiarPassword extends AppCompatActivity {
         drawable1.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
         drawable2.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
         drawable3.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
+    }
+    public void btnAceptarOnClick(View view){
+        //obtenemos los datos
+        String oldPassword = txtOldPassword.getText().toString();
+        String newPassword = txtNewPassword.getText().toString();
+        String newPassword2 = txtNewPassword2.getText().toString();
+        //comprobamos que no esten vacios
+        if(oldPassword.equals("") || newPassword.equals("") || newPassword2.equals("")){
+            CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(),100);
+            return;
+        }
+        //comprobamos la contrasena vieja sea la del usuario
+        if(!Cifrado.SHA256(oldPassword).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
+            CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(),100);
+            return;
+        }
+        //comprobamos que las dos contrasenas sean iguales
+        if(!ComprobarDatos.comprobarPassword(newPassword,newPassword2)){
+            CrearToast.toastLargo("Las contraseñas no coinciden",getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(),100);
+            return;
+        }
+        //comprobamos que la contraseña cumpla con los requisitos
+        if(!ComprobarDatos.comprobarFormatoPassword(newPassword)){
+            CrearToast.toastLargo("La contraseña no cumple con los requisitos",getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(),100);
+            return;
+        }
+        if(GestionUsuarios.cambiarPassword(ConfiguracionUsuario.getNombreUsuario(),Cifrado.SHA256(newPassword))){
+            CrearToast.toastLargo("Contraseña cambiada correctamente",getApplicationContext()).show();
+        }else{
+            CrearToast.toastLargo("Error al cambiar la contraseña",getApplicationContext()).show();
+            Vibracion.vibrar(getApplicationContext(),100);
+        }
+
 
     }
 }

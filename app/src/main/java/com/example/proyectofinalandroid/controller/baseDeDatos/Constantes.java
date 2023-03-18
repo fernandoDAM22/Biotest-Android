@@ -26,4 +26,8 @@ public interface Constantes {
     String URL_PREGUNTA_ACERTADA = SERVER + "admin/preguntas/preguntaAcertada.php";
     String URL_OBTENER_ID = SERVER + "admin/preguntas/obtenerId.php";
     String URL_OBTENER_CATEGORIA_PREGUNTA = SERVER + "admin/categorias/obtenerCategoriaPregunta.php";
+    String URL_CAMBIAR_PASSWORD = SERVER + "admin/usuarios/modificarPassword.php";
+    String URL_CAMBIAR_USUARIO = SERVER + "admin/usuarios/modificarUsuario.php";
+    String URL_CAMBIAR_EMAIL = SERVER + "admin/usuarios/modificarEmail.php";
+    String URL_CAMBIAR_TELEFONO = SERVER + "admin/usuarios/modificarTelefono.php";
 }

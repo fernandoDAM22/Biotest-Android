@@ -1,12 +1,18 @@
 package com.example.proyectofinalandroid.controller.tools;
 
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
+import com.example.proyectofinalandroid.controller.acceso.Registro;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Esta clase permite comprobar que los datos introducidos por
@@ -83,22 +89,34 @@ public class ComprobarDatos implements Patrones {
      * @return Codigos.ERROR si existe alguien con ese nombre, 0 si no
      * @author Fernando
      */
-    public static int existeUsuario(String nombre) {
-        //creamos el mapa con los parametros
-        HashMap<String, String> params = new HashMap<>();
-        //añadimos el nombre al mapa
-        params.put("nombre", nombre);
-        //obtenemos la respuesta
-        String respuesta = HttpRequest.getRequest(Constantes.URL_EXISTE_USUARIO, params);
-        //parseamos la respuesta
-        JsonElement element = JsonParser.parseString(respuesta);
-        //devolvemos un resutado en funcion de lo ocurrido
-        if (element.getAsBoolean()) {
-            return 0;
-        } else {
-            return Codigos.ERROR;
+    public static int existeUsuario(String nombre){
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Integer> future = executor.submit(() -> {
+            //creamos el mapa con los parametros
+            HashMap<String, String> params = new HashMap<>();
+            //añadimos el nombre al mapa
+            params.put("nombre", nombre);
+            //obtenemos la respuesta
+            String respuesta = HttpRequest.getRequest(Constantes.URL_EXISTE_USUARIO, params);
+            //parseamos la respuesta
+            JsonElement element = JsonParser.parseString(respuesta);
+            //devolvemos un resutado en funcion de lo ocurrido
+            if (element.getAsBoolean()) {
+                return 0;
+            } else {
+                return Codigos.ERROR;
+            }
+        });
+        try {
+            executor.shutdown();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
+        return Codigos.ERROR;
+
     }
+
 
 
 }

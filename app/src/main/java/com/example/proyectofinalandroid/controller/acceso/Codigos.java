@@ -83,4 +83,6 @@ public interface Codigos {
      */
     String OBTENER_TIPO = "tipo";
 
+    String OBTENER_EMAIL = "email";
+    String OBTENER_TELEFONO = "telefono";
 }
