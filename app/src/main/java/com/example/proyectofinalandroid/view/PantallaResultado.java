@@ -95,6 +95,7 @@ public class PantallaResultado extends AppCompatActivity {
      * MetodoOptionsItemSelected sobreescrito para poderle dar funcionalidad al menu
      * @param item es el item del menu que se pulsa
      * @return true si se pulsa sobre una opcion valida del menu, false si ocurre algun error
+     * @author Fernando
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -241,6 +242,7 @@ public class PantallaResultado extends AppCompatActivity {
      * Este metodo permite mostrar el AlertDialog con la informacion de una pregunta
      * @param pregunta obtejo pregunta con los datos que vamos a mostrar
      * @return el AlertDialog creado
+     * @author Fernando
      */
     private AlertDialog construirDialogo(Pregunta pregunta) {
         //obtenemos los datos

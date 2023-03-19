@@ -18,7 +18,7 @@ public class Cifrado {
      * @author Fernando
      */
     public static String SHA256(String password) {
-        MessageDigest md = null;
+        MessageDigest md;
         byte[] hash;
         try {
             md = MessageDigest.getInstance("SHA-256");

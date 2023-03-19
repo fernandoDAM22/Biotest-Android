@@ -150,6 +150,8 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
      * Este metodo permite cerrar la pantalla de registro y volver a la ventana de login, se
      * ejecuta cuando se pulsa el boton de cancelar
      * @param view es el boton que se pulsa
+     * @author Fernando
+     *
      */
     public void cancelar(View view){
         finish();

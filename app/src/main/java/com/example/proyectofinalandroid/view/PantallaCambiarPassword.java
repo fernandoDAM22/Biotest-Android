@@ -75,6 +75,7 @@ public class PantallaCambiarPassword extends AppCompatActivity {
      * MetodoOptionsItemSelected sobreescrito para poderle dar funcionalidad al menu
      * @param item es el item del menu que se pulsa
      * @return true si se pulsa sobre una opcion valida del menu, false si ocurre algun error
+     * @author Fernando
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,12 +111,17 @@ public class PantallaCambiarPassword extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Este metodo se ejecuta cuando el usuario pulsa el boton de aceptar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void btnAceptarOnClick(View view){
         //obtenemos los datos
         String oldPassword = txtOldPassword.getText().toString();
         String newPassword = txtNewPassword.getText().toString();
         String newPassword2 = txtNewPassword2.getText().toString();
-        //comprobamos que no esten vacios
+        //comprobamos que los campos no esten vacios
         if(oldPassword.equals("") || newPassword.equals("") || newPassword2.equals("")){
             CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
@@ -139,6 +145,7 @@ public class PantallaCambiarPassword extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //cambiamos la contrasena y mostramos el mensaje correspondiente
         if(GestionUsuarios.cambiarPassword(ConfiguracionUsuario.getNombreUsuario(),Cifrado.SHA256(newPassword))){
             CrearToast.toastLargo("Contraseña cambiada correctamente",getApplicationContext()).show();
             limpiarCampos();
@@ -147,11 +154,22 @@ public class PantallaCambiarPassword extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }
+
+    /**
+     * Este metodo permite limpiar los inputs
+     * @author Fernando
+     */
     private void limpiarCampos(){
         txtOldPassword.setText("");
         txtNewPassword.setText("");
         txtNewPassword2.setText("");
     }
+
+    /**
+     * Este metodo se ejecuta cuando el usuario pulsa el boton de aceptar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void btnCancelarOnClick(View view){
         limpiarCampos();
     }

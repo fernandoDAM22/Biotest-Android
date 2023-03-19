@@ -93,6 +93,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * MetodoOptionsItemSelected sobreescrito para poderle dar funcionalidad al menu
      * @param item es el item del menu que se pulsa
      * @return true si se pulsa sobre una opcion valida del menu, false si ocurre algun error
+     * @auhor Fernando
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,6 +133,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * Este metodo se ejecuta cuando se pulsa alguno de los 4 ToggleButtons
      *
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
     public void btnClick(View view) {
         //se comprueba si el boton pulsado esta seleccionado o no
@@ -150,6 +152,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      *
      * @param view   es el boton que se pulsa
      * @param estado indica si estan seleccionados o no
+     * @author Fernando
      */
     private void cambiarColorFondo(View view, boolean estado) {
         if (estado) {
@@ -163,6 +166,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * Este metodo desmcarca los botones a excepcion del que se ha pulsado
      *
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
     private void desmarcarOtrosBotones(View view) {
         //se obtiene el contenedor de los botones
@@ -184,6 +188,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * juego en la etiqueta correspondiente
      *
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
     public void colocarDescripcion(View view) {
         TextView textView = findViewById(R.id.txtDescripcion);
@@ -199,6 +204,11 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         }
     }
 
+    /**
+     * Este metodo se ejecuta cuando se pulsa el boton de cancelar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void onClickCancelar(View view) {
         //se obtiene el contenedor de los botones
         ViewGroup viewGroup = (ViewGroup) view.getParent();
@@ -219,6 +229,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * Este metodo permite retornar el boton seleccionado
      * @return el boton seleccionado, null si no hay ninguno seleccionado
      * @param viewGroup es el layout donde se encuentran los botones
+     * @author Fernando
      */
     private ToggleButton obtenerBotonSeleccionado(ViewGroup viewGroup) {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
@@ -233,6 +244,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
     /**
      * Este metodo se ejecuta cuando se pulsa el boton de jugar
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
     public void onClickJugar(View view) {
         //se obtiene el boton
@@ -254,12 +266,19 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         } else if (boton.equals(btnModoSinFallos)) {
             tipoPartida = TipoPartida.MODO_SIN_FALLOS;
         } else {
+            //este metodo ya manda los extras con el tipo de partida y el cuestionario elegido, por eso el return
             mostrarDialogoCuestionarios();
             return;
         }
+        //se manda el extra con el tipo de partida
         intent.putExtra("tipo",tipoPartida);
         startActivity(intent);
     }
+
+    /**
+     * Este metodo permite mostrar un AlertDialog con los cuestionarios disponibles
+     * @author Fernando
+     */
     private void mostrarDialogoCuestionarios() {
         Intent intent = new Intent(this, PantallaJugar.class);
         ArrayList<String> cuestionarios = null;

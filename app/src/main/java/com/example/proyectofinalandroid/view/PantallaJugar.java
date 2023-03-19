@@ -110,12 +110,13 @@ public class PantallaJugar extends AppCompatActivity {
     /**
      * Metodo obBackPressed sobreescrito para evitar que el usuario pueda atras
      * usando el boton de retroceso del movil en mitad de una partida
+     *
      * @author Fernando
      */
     @Override
     public void onBackPressed() {
-        CrearToast.toastCorto("No se puede volver atras hasta que finalices la partida",getApplicationContext()).show();
-        Vibracion.vibrar(getApplicationContext(),100);
+        CrearToast.toastCorto("No se puede volver atras hasta que finalices la partida", getApplicationContext()).show();
+        Vibracion.vibrar(getApplicationContext(), 100);
     }
 
     /**
@@ -143,6 +144,11 @@ public class PantallaJugar extends AppCompatActivity {
      * @author Fernando
      */
     private void jugar() {
+        /*
+         * En caso de que la partida no sea modo libre, (la cual requiere del boton de cancelar)
+         * le eliminamos del layout y ajustamos el boton de siguiente para que ocupe la totalidad del ancho
+         * del layout
+         */
         if (tipoPartida != TipoPartida.MODO_LIBRE) {
             LinearLayout layout = findViewById(R.id.layoutBotones);
             layout.removeView(botonFinalizar);
@@ -196,6 +202,7 @@ public class PantallaJugar extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
+        //creamos la partida en modo libre y empezamos a jugar
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
         partidaModoLibre = new PartidaModoLibre(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, labelPregunta, getApplicationContext());
         idPregunta = partidaModoLibre.ciclo();
@@ -215,6 +222,7 @@ public class PantallaJugar extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
+        //creamos la partida modo libre y empezamos a jugar
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
         partidaModoSinFallos = new PartidaModoSinFallos(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, labelPregunta, getApplicationContext());
         idPregunta = partidaModoSinFallos.ciclo();
@@ -234,6 +242,7 @@ public class PantallaJugar extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
+        //creamos la partida de modo clasico y empezamos a jugar
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
         partidaModoClasico = new PartidaModoClasico(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, labelPregunta, getApplicationContext());
         partidaModoClasico.seleccionarPregunta();
@@ -255,6 +264,7 @@ public class PantallaJugar extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
+        //creamos la partida en modo cuestionario y empezamos a jugar
         partida = new Partida(idPartida, tipoPartida.toString(), idUsuario);
         partidaCuestionario = new PartidaCuestionario(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, labelPregunta, cuestionario, getApplicationContext());
         partidaCuestionario.seleccionarPregunta();
@@ -265,10 +275,10 @@ public class PantallaJugar extends AppCompatActivity {
      * Este metodo permite responder una pregunta
      *
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
 
     public void responder(View view) {
-
         //en funcion del tipo de partida llamamos al metodo responder de la partida correspondiente
         switch (tipoPartida) {
             case MODO_LIBRE:
@@ -340,6 +350,7 @@ public class PantallaJugar extends AppCompatActivity {
      * Este metodo permite responder una pregunta cuando se esta jugando una partida en modo libre
      *
      * @param view es el boton que se pulsa
+     * @author Fernando
      */
     private void responderModoLibre(View view) {
         //solo se permite pulsar un boton, hasta que se coloque otra pregunta
@@ -360,6 +371,12 @@ public class PantallaJugar extends AppCompatActivity {
         }
     }
 
+    /**
+     * Este metodo permite responder una pregunta cuando se esta jugando una partida en modo cuestionario
+     *
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     private void responderCuestionario(View view) {
         //nos aseguramos de que la pregunta no ha sido respondida ya
         if (bandera) {
@@ -379,6 +396,12 @@ public class PantallaJugar extends AppCompatActivity {
         }
     }
 
+    /**
+     * Este metodo permite pasar a la siguiente pregunta
+     *
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void siguiente(View view) {
         //nos aseguramos de que la pregunta no ha sido ya respondida
         if (bandera) {
@@ -432,12 +455,13 @@ public class PantallaJugar extends AppCompatActivity {
         colocarPuntuacion();
         Intent intent = new Intent(this, PantallaResultado.class);
         //mandamos el id de la partida hacia la pantalla donde se muestra el resultado
-        intent.putExtra("id_partida",idPartida);
+        intent.putExtra("id_partida", idPartida);
         startActivity(intent);
     }
 
     /**
      * Este metodo permite colocar la puntuacion de la partida una vez terminada
+     *
      * @author Fernando
      */
     private void colocarPuntuacion() {
@@ -467,6 +491,7 @@ public class PantallaJugar extends AppCompatActivity {
      * de juego sea modo libre, cuenta con doble verificacion, para terminar
      * una partida es necesario pulsar el boton de aceptar del dialogo que
      * se nos mostrara una vez pulsado el boton de finalizar
+     *
      * @param view es el boton que se pulsa
      * @author Fernando
      */

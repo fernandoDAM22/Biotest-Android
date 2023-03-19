@@ -13,6 +13,7 @@ import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,9 +21,10 @@ import java.util.Collections;
 /**
  * Esta clase permite jugar una partida en modo cuestionario,
  * se resuelven las preguntas de un cuestionario previamente creado
+ *
  * @author Fernando
  */
-public class PartidaCuestionario extends GestionPartida{
+public class PartidaCuestionario extends GestionPartida {
     PilaSinRepetidos pila;
     /**
      * Contienen los ids de todas las preguntas de la base de datos
@@ -47,17 +49,18 @@ public class PartidaCuestionario extends GestionPartida{
 
     /**
      * Constructor con parametros
-     * @param partida objeto partida
-     * @param btnOpcion1 boton para la primera respuesta de la partida
-     * @param btnOpcion2 boton para la segunda respuesta de la partida
-     * @param btnOpcion3 boton para la tercera respuesta de la partida
-     * @param btnOpcion4 boton para la cuarta respuesta de la partida
-     * @param enunciado TextView para el enunciado
+     *
+     * @param partida      objeto partida
+     * @param btnOpcion1   boton para la primera respuesta de la partida
+     * @param btnOpcion2   boton para la segunda respuesta de la partida
+     * @param btnOpcion3   boton para la tercera respuesta de la partida
+     * @param btnOpcion4   boton para la cuarta respuesta de la partida
+     * @param enunciado    TextView para el enunciado
      * @param cuestionario cuestionario que se resuelve
-     * @param context contexto de la aplicacion
+     * @param context      contexto de la aplicacion
      * @author Fernando
      */
-    public PartidaCuestionario(Partida partida, Button btnOpcion1, Button btnOpcion2, Button btnOpcion3, Button btnOpcion4, TextView enunciado,String cuestionario,Context context) {
+    public PartidaCuestionario(Partida partida, Button btnOpcion1, Button btnOpcion2, Button btnOpcion3, Button btnOpcion4, TextView enunciado, String cuestionario, Context context) {
         super(partida, btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4, enunciado);
         pila = new PilaSinRepetidos();
         idPreguntas = GestionCuestionarios.obtenerIdPreguntas(cuestionario);
@@ -69,17 +72,19 @@ public class PartidaCuestionario extends GestionPartida{
 
     /**
      * Este metodo nos permite saber cuando se ha terminado una partida
+     *
      * @return true si se termina, false si no
      * @author Fernando
      */
     @Override
     public boolean fin() {
-        //negamos pila.isEmpty(), si la pila esta llena retorna false, y si esta vacia retorna true
+        //retornamos pila.isEmpty(), si la pila esta llena retorna false, y si esta vacia retorna true
         return !pila.isEmpty();
     }
 
     /**
      * Este metodo nos permite responder una pregunta
+     *
      * @param boton es el boton que se pulsa
      * @return true si se acierta la pregunta, false si no
      * @author Fernando
@@ -112,15 +117,17 @@ public class PartidaCuestionario extends GestionPartida{
             if (btnOpcion4.getText().equals(pregunta.getRespuestaCorrecta())) {
                 btnOpcion4.setBackgroundColor(colorCorrecto);
             }
-            Vibracion.vibrar(context,100);
+            Vibracion.vibrar(context, 100);
             return false;
         }
     }
+
     /**
      * Este metodo permite obtener los datos de la pregunta seleccionada y
      * colocarlos en la pantalla
      *
      * @return el id de la pregunta seleccionada
+     * @author Fernando
      */
     public int obtenerDatos() {
         //sacamos un id de la lista
@@ -140,9 +147,9 @@ public class PartidaCuestionario extends GestionPartida{
             //desordenamos las respuesta
             Collections.shuffle(Arrays.asList(respuestas));
             //las colocamos en los botones
-            Button[] botones = {btnOpcion1,btnOpcion2,btnOpcion3,btnOpcion4};
+            Button[] botones = {btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4};
             for (int i = 0; i < botones.length; i++) {
-                colocarRespuestas(botones[i],respuestas[i]);
+                colocarRespuestas(botones[i], respuestas[i]);
             }
         }
         return id;
@@ -166,6 +173,7 @@ public class PartidaCuestionario extends GestionPartida{
     /**
      * Este metodo nos permite realizar un ciclo en la partida, (seleccionar una
      * nueva pregunta y restablecer los colores de los botones
+     *
      * @return el id de la pregunta seleccionada
      */
     public int ciclo() {

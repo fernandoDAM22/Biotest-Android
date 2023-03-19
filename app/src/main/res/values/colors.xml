@@ -7,15 +7,26 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--  Color de fondo de las ventanas de registro y login  -->
     <color name="color_fondo_inicio">#1DD1A1</color>
+    <!-- Color azul de los botones -->
     <color name="color_azul_botones">#48DBFF</color>
+    <!-- Color de los botones de cancelar -->
     <color name="color_botones_cancelar">#EE5253</color>
+    <!-- Color de los botones de aceptar -->
     <color name="color_botones_aceptar">#1DD1A1</color>
+    <!-- Color de los ToggleButtons cuando no estan seleccionados-->
     <color name="color_boton_apagado">#48DBFB</color>
+    <!--    Color de los ToggleButtons cuando estan seleccionados-->
     <color name="color_boton_encendido">#341f97</color>
+    <!-- Color de fondo de la pantallas excepto de la de login y registro-->
     <color name="color_fondo_pantallas">#3C3F41</color>
+    <!-- Color que se le pone al boton con la respuesta correcta -->
     <color name="color_correcto">#2ECC71</color>
+    <!-- Color que se le pone al boton con la respuesta incorrecta-->
     <color name="color_incorrecto">#E74C3C</color>
+    <!-- Color que se le pone a las preguntas acertadas en la pantalla resultado-->
     <color name="color_preguntas_acertadas">#A5FFD6</color>
+    <!-- Color que se le pone a las preguntas falladas en la pantalla resultado-->
     <color name="color_preguntas_falladas">#FF686B</color>
 </resources>

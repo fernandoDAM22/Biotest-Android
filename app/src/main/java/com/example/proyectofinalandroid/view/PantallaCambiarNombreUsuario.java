@@ -24,18 +24,34 @@ import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
+/**
+ * Esta clase pinta la pantalla que permite al usuario cambiar su nombre de usuario
+ * @author Fernando
+ */
 public class PantallaCambiarNombreUsuario extends AppCompatActivity {
+    /**
+     * Input para la contrasena del usuario
+     */
     EditText txtPassword;
+    /**
+     * Input para el nombre de usuario
+     */
     EditText txtUsername;
+    /**
+     * TextView para mostrar el usuario
+     */
     TextView txtUsuarioActual;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_cambiar_nombre_usuario);
+        //iniciamos las variables
         txtPassword = findViewById(R.id.inputPasswordTelefono);
         txtUsername = findViewById(R.id.inputCambiarUsername);
         txtUsuarioActual = findViewById(R.id.txtUsuarioActual);
+        //mostramos el usuario actual
         txtUsuarioActual.setText("Usuario actual: " + ConfiguracionUsuario.getNombreUsuario());
+        //le aplicamos un filtro blanco a los inputs
         Drawable drawable1 = txtPassword.getBackground();
         Drawable drawable2 = txtUsername.getBackground();
         drawable1.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
@@ -93,7 +109,13 @@ public class PantallaCambiarNombreUsuario extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Este metodo se ejecuta cuando el usuario pulsa el boton de aceptar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void btnAceptarOnClick(View view){
+        //obtenemos la contrasena y el nombre de usuario
         String password = txtPassword.getText().toString();
         String username = txtUsername.getText().toString();
         //se comprueba que los datos no esten vacios
@@ -102,22 +124,25 @@ public class PantallaCambiarNombreUsuario extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
-        //comprobamos la contrasena vieja sea la del usuario
+        //comprobamos la contrasena  sea la del usuario
         if(!Cifrado.SHA256(password).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
             CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //se comprueba que el nombre de usuario cumpla con los requisitos
         if(!ComprobarDatos.comprobarNombre(username)){
             CrearToast.toastLargo("Error, el nombre de usuario no cumple con los requisitos",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //se comprueba que no exista ya alguien con ese usuario
         if(ComprobarDatos.existeUsuario(username) == 0){
             CrearToast.toastLargo("Error, ya existe un usuario con ese nombre",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //Se modifica el nombre de usuario y se muestra el mensaje de error correspondiente
         if(GestionUsuarios.modificarNombre(ConfiguracionUsuario.getNombreUsuario(),username)){
             CrearToast.toastLargo("Nombre de usuario cambiado correctamete",getApplicationContext()).show();
             ConfiguracionUsuario.setNombreUsuario(username);
@@ -128,10 +153,21 @@ public class PantallaCambiarNombreUsuario extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }
+
+    /**
+     * Este metodo permite limpiar los inputs
+     * @author Fernando
+     */
     private void limpiarCampos(){
         txtPassword.setText("");
         txtUsername.setText("");
     }
+
+    /**
+     * Este metodo se ejecuta cuando el usuario pulsa el boton de cancelar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void btnCancelarOnClick(View view){
         limpiarCampos();
     }

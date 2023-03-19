@@ -18,7 +18,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveTask;
 
 /**
- * Esta clase permite que el usuario se registre en el sistema
+ * Esta clase contiene los metodos necesarios para que el
+ * usuario se registre en el sistema
  *
  * @author Fernando
  */
@@ -57,12 +58,14 @@ public class Login implements Codigos {
     public static String obtenerDatos(String nombre, String tipoDato) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<String> future = executor.submit(() -> {
-            String url = Constantes.URL_LOGIN;
+            //creamos el mapa con los parametros necesarios
             HashMap<String, String> params = new HashMap<>();
             params.put("nombre", nombre);
-            String jsonResultado = HttpRequest.getRequest(url, params);
+            //obtenemos el resultado
+            String resultado = HttpRequest.getRequest(Constantes.URL_LOGIN, params);
             Gson gson = new Gson();
-            JsonElement jsonElement = gson.fromJson(jsonResultado, JsonElement.class);
+            //lo parseamos
+            JsonElement jsonElement = gson.fromJson(resultado, JsonElement.class);
             JsonArray jsonArray = jsonElement.getAsJsonArray();
             int id = jsonArray.get(0).getAsInt();
             String name = jsonArray.get(1).getAsString();
@@ -71,6 +74,7 @@ public class Login implements Codigos {
             String telefono = jsonArray.get(4).getAsString();
             String tipo = jsonArray.get(5).getAsString();
             Usuario usuario = new Usuario(id, name, contrasena, email, telefono, tipo);
+            //retornamos el dato que se nos haya pedido
             switch (tipoDato) {
                 case Codigos.OBTENER_PASSWORD:
                     return usuario.getPassword();
@@ -84,6 +88,8 @@ public class Login implements Codigos {
             return null;
         });
         try {
+            //terminamos el executor y retornamos el resultado del future
+            executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

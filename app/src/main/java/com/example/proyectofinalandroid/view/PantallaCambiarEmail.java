@@ -26,18 +26,34 @@ import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
 import java.util.Locale;
 
+/**
+ * Esta clase pinta la pantalla permite al usuario cambiar su email
+ * @author Fernando
+ */
 public class PantallaCambiarEmail extends AppCompatActivity {
+    /**
+     * Input para la contrasena del usuario
+     */
     EditText txtPassword;
+    /**
+     * Input para el email del usuario
+     */
     EditText txtEmail;
+    /**
+     * TextView para mostrar el email actual del usuario
+     */
     TextView txtEmailActual;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_cambiar_email);
+        //inicializamos las variables
         txtPassword = findViewById(R.id.inputPasswordTelefono);
         txtEmail = findViewById(R.id.inputCambiarTelefono);
         txtEmailActual = findViewById(R.id.txtEmailActual);
+        //Colocamos el email actual del usuario
         txtEmailActual.setText("Email actual: " + Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_EMAIL));
+        //le aplicamos un filtro blanco a los inputs
         Drawable drawable1 = txtPassword.getBackground();
         Drawable drawable2 = txtEmail.getBackground();
         drawable1.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
@@ -60,6 +76,7 @@ public class PantallaCambiarEmail extends AppCompatActivity {
      * MetodoOptionsItemSelected sobreescrito para poderle dar funcionalidad al menu
      * @param item es el item del menu que se pulsa
      * @return true si se pulsa sobre una opcion valida del menu, false si ocurre algun error
+     * @author Fernando
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,26 +112,35 @@ public class PantallaCambiarEmail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Este metodo se ejecuta cuando el usuario pulsa el boton de aceptar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
+
     public void btnAceptarOnClick(View view){
+        //obtenemos la contrasena y el email
         String password = txtPassword.getText().toString();
         String email = txtEmail.getText().toString();
-
+        //comprobamos que os campos no esten vacios
         if(password.equals("") || email.equals("")){
             CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
-        //comprobamos la contrasena vieja sea la del usuario
+        //comprobamos la contrasena sea la del usuario
         if(!Cifrado.SHA256(password).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
             CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //comprobamos que el email cumple con los requisitos
         if(!ComprobarDatos.comprobarCorreo(email)){
             CrearToast.toastLargo("Error, el email no cumple con los requistos",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
+        //cambiamos el email al usuario y mostramos el mensaje correspondiente
         if(GestionUsuarios.cambiarEmail(ConfiguracionUsuario.getNombreUsuario(),email)){
             CrearToast.toastLargo("Email cambiado correctamete",getApplicationContext()).show();
             limpiarCampos();
@@ -124,10 +150,20 @@ public class PantallaCambiarEmail extends AppCompatActivity {
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }
+    /**
+     * Este metodo permite limpiar los inputs
+     * @author Fernando
+     */
     private void limpiarCampos(){
         txtPassword.setText("");
         txtEmail.setText("");
     }
+
+    /**
+     * Este metodo se ejecuta cuando se pulsa el boton de cancelar
+     * @param view es el boton que se pulsa
+     * @author Fernando
+     */
     public void btnCancelarOnClick(View view){
         limpiarCampos();
     }
