@@ -30,4 +30,7 @@ public interface Constantes {
     String URL_CAMBIAR_USUARIO = SERVER + "admin/usuarios/modificarUsuario.php";
     String URL_CAMBIAR_EMAIL = SERVER + "admin/usuarios/modificarEmail.php";
     String URL_CAMBIAR_TELEFONO = SERVER + "admin/usuarios/modificarTelefono.php";
+    String URL_OBTENER_PARTIDA = SERVER + "admin/partidas/obtenerPartida.php";
+
+    String EMAIL = "BioTestProyecto@gmail.com";
 }

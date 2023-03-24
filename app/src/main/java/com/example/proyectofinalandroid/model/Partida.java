@@ -21,6 +21,15 @@ public class Partida {
     public Partida() {
     }
 
+    public Partida(int id, LocalDate fecha, int puntuacion, String tipo, int idUsuario, ArrayList<Pregunta> preguntas) {
+        this.id = id;
+        this.fecha = fecha;
+        this.puntuacion = puntuacion;
+        this.tipo = tipo;
+        this.idUsuario = idUsuario;
+        this.preguntas = preguntas;
+    }
+
     /**
      * Este constructor establece por defecto la puntuacion a 0
      * y la fecha a la fecha actual del sistema
@@ -91,6 +100,14 @@ public class Partida {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public ArrayList<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(ArrayList<Pregunta> preguntas) {
+        this.preguntas = preguntas;
     }
 
     @Override

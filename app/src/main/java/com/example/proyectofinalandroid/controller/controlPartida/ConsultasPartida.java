@@ -2,12 +2,14 @@ package com.example.proyectofinalandroid.controller.controlPartida;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.HttpRequest;
 import com.example.proyectofinalandroid.model.Partida;
+import com.example.proyectofinalandroid.model.Pregunta;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -228,6 +230,64 @@ public class ConsultasPartida {
         }
     }
 
+    public static Partida obtenerPartida(int idPartida){
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<Partida> future = executor.submit(() -> {
+            HashMap<String,String> values = new HashMap<>();
+            values.put("id", String.valueOf(idPartida));
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PARTIDA,values);
+            Gson gson = new Gson();
+            ArrayList<Pregunta> preguntas = ConsultasPartida.obtenerPreguntas(idPartida);
+            String[] partida = gson.fromJson(respuesta, String[].class);
+            if (partida != null) {
+                return new Partida(Integer.parseInt(partida[0]),
+                        LocalDate.parse(partida[1]),Integer.parseInt(partida[2]),
+                        partida[3],Integer.parseInt(partida[4]),preguntas);
+            }
+            return null;
+        });
+        try {
+            //terminamos el executor
+            executor.shutdown();
+            //devolvemos el resultado devuelto por el executor
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    private static ArrayList<Pregunta> obtenerPreguntas(int idPartida) {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<ArrayList<Pregunta>> future = executor.submit(() -> {
+            //creamos un mapa con los valores necesarios
+            HashMap<String,String> data = new HashMap<>();
+            data.put("partida",String.valueOf(idPartida));
+            //obtenemos la respuessta
+            String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
+            System.err.println(respuesta);
+            //la parseamos
+            Gson gson = new Gson();
+            List<String[]> listaPreguntas = gson.fromJson(respuesta, new TypeToken<List<String[]>>(){}.getType());
+            //añadimos los datos de las preguntas a un ArrayList
+            ArrayList<Pregunta> preguntas = new ArrayList<>();
+            for (String[] pregunta : listaPreguntas) {
+                preguntas.add(new Pregunta(pregunta[0],pregunta[1],pregunta[2],pregunta[3],pregunta[4]));
+            }
+            //retornamos el ArrayList con los datos de las preguntas
+            return preguntas;
+        });
+        try {
+            //terminamos el executor
+            executor.shutdown();
+            //devolvemos el resultado devuelto por el executor
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 }

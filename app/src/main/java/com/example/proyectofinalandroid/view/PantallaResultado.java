@@ -6,7 +6,11 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
+import android.provider.Telephony;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,12 +24,19 @@ import android.widget.Toast;
 
 import com.example.proyectofinalandroid.MainActivity;
 import com.example.proyectofinalandroid.R;
+import com.example.proyectofinalandroid.controller.acceso.Codigos;
+import com.example.proyectofinalandroid.controller.acceso.Login;
+import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionCategorias;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
+import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.controlPartida.ConsultasPartida;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
+import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
+import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
+import com.example.proyectofinalandroid.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -308,6 +319,61 @@ public class PantallaResultado extends AppCompatActivity {
             finishAffinity();
             System.exit(0);
             exitCount = 0;
+        }
+    }
+    public void btnSendEmailOnClick(View view){
+        Partida partida = ConsultasPartida.obtenerPartida(idPartida);
+        sendEmail(partida);
+
+
+    }
+    /**
+     * Este metodo crea un resumen de una partida en formato String
+     * @param partida es el objeto partida que contiene los datos de la partida de la cual
+     *                queremos obtener el resumen
+     * @return Un StringBuilder con los datos de la partida
+     * @author Fernando
+     */
+    public StringBuilder crearResumen(Partida partida){
+        int idPregunta;
+        boolean acertada;
+        String texto;
+        StringBuilder cadena = new StringBuilder();
+        cadena.append("-----RESUMEN PARTIDA-----\n");
+        cadena.append("USUARIO ===> " ).append(ConfiguracionUsuario.getNombreUsuario()).append("\n");
+        cadena.append("FECHA ===> ").append(partida.getFecha()).append("\n");
+        cadena.append("TIPO ===> ").append(partida.getTipo()).append("\n");
+        cadena.append("PUNTUACION ===> ").append(partida.getPuntuacion()).append("\n");
+        cadena.append("PREGUNTAS RESPONDIDAS: ").append("\n");
+        for(Pregunta p: partida.getPreguntas()){
+            idPregunta = GestionPreguntas.obtenerIdPregunta(p.getEnunciado());
+            acertada = GestionPreguntas.preguntaAcertada(idPartida,idPregunta);
+            if(acertada){
+                texto = "SI";
+            }else{
+                texto = "NO";
+            }
+            cadena.append("\t").append("-").append(p.getEnunciado()).append(" acertada ==> ").append(texto).append("\n");
+        }
+        return cadena;
+    }
+    private void sendEmail(Partida partida) {
+        String emailDestino = Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_EMAIL);
+        String[] TO = {emailDestino};
+        String[] CC = {Constantes.EMAIL};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "RESUMEN PARTIDA");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, crearResumen(partida).toString());
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Enviar correo electrónico..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            CrearToast.toastLargo("No hay clientes de correo electronico instalados",getApplicationContext()).show();
         }
     }
 }

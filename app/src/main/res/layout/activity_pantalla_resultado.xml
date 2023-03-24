@@ -45,12 +45,12 @@
 
     <Button
         android:id="@+id/btnMenuPrincipal"
-        android:onClick="volverMenuPrincipal"
         android:layout_width="157dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="111dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/color_botones_aceptar"
+        android:onClick="volverMenuPrincipal"
         android:text="Menu Principal"
         android:textColor="@color/black"
         android:textSize="15dp"
@@ -60,16 +60,33 @@
 
     <Button
         android:id="@+id/btnSalir"
-        android:onClick="salir"
         android:layout_width="157dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="111dp"
+        android:layout_marginTop="70dp"
         android:backgroundTint="@color/color_botones_cancelar"
+        android:onClick="salir"
         android:text="Salir"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listPreguntas" />
+
+    <Button
+        android:id="@+id/btnSendEmail"
+        android:layout_width="276dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="68dp"
+        android:backgroundTint="@color/color_azul_botones"
+        android:onClick="btnSendEmailOnClick"
+        android:text="Enviar Email"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMenuPrincipal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
