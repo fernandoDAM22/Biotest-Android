@@ -230,14 +230,23 @@ public class ConsultasPartida {
         }
     }
 
+    /**
+     * Este metodo permite obtener los datos de una partida a traves de su id
+     * @param idPartida es el id de la partida de la que queremos obtener sus datos
+     * @return un objeto Partida con los datos de la partida, null si ocurre algun error
+     * @author Fernando
+     */
     public static Partida obtenerPartida(int idPartida){
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<Partida> future = executor.submit(() -> {
+            //Creamos un mapa con los parametros necesarios
             HashMap<String,String> values = new HashMap<>();
             values.put("id", String.valueOf(idPartida));
+            //obtenemos la respuesta
             String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PARTIDA,values);
             Gson gson = new Gson();
             ArrayList<Pregunta> preguntas = ConsultasPartida.obtenerPreguntas(idPartida);
+            //La parseamos
             String[] partida = gson.fromJson(respuesta, String[].class);
             if (partida != null) {
                 return new Partida(Integer.parseInt(partida[0]),
@@ -258,6 +267,12 @@ public class ConsultasPartida {
 
     }
 
+    /**
+     * Este metodo permite obtener las preguntas de una partida a traves de su id
+     * @param idPartida es el id de la partida de la queremos obtener sus preguntas
+     * @return un ArrayList con las preguntas de la partida, null si ocurre algun error
+     * @author Fernando
+     */
     private static ArrayList<Pregunta> obtenerPreguntas(int idPartida) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<ArrayList<Pregunta>> future = executor.submit(() -> {

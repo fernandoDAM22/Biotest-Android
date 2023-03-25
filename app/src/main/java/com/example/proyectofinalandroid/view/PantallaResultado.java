@@ -321,11 +321,15 @@ public class PantallaResultado extends AppCompatActivity {
             exitCount = 0;
         }
     }
+
+    /**
+     * Este metodo se ejecuta cuando se pulsa el boton de enviar email,
+     * permite enviar un correo con el resumen de la partida que se acaba de jugar
+     * @param view es el boton que se pulsa
+     */
     public void btnSendEmailOnClick(View view){
         Partida partida = ConsultasPartida.obtenerPartida(idPartida);
         sendEmail(partida);
-
-
     }
     /**
      * Este metodo crea un resumen de una partida en formato String
@@ -357,6 +361,12 @@ public class PantallaResultado extends AppCompatActivity {
         }
         return cadena;
     }
+
+    /**
+     * Este metodo permite enviar un email con el resumen de una partida
+     * @param partida es el objeto partida con los datos que se van a enviar por correo
+     * @author Fernando
+     */
     private void sendEmail(Partida partida) {
         String emailDestino = Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_EMAIL);
         String[] TO = {emailDestino};
