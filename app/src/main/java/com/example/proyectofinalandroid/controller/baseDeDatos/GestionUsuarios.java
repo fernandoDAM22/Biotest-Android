@@ -38,7 +38,6 @@ public class GestionUsuarios {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return -1;
         }
     }
@@ -59,7 +58,6 @@ public class GestionUsuarios {
             data.put("password",password);
             //obtenemos la respuesta
             String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_PASSWORD,data);
-            System.err.println("Respuesta ---------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //retornamos la respuesta como entero
@@ -71,7 +69,6 @@ public class GestionUsuarios {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -92,7 +89,6 @@ public class GestionUsuarios {
             data.put("nombreNuevo",nombreNuevo);
             //obtenemos la respuesta
             String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_USUARIO,data);
-            System.err.println("Respuesta ---------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //retornamos la respuesta como boolean
@@ -104,7 +100,6 @@ public class GestionUsuarios {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -124,7 +119,6 @@ public class GestionUsuarios {
             data.put("email",email);
             //obtenemos la respuesta
             String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_EMAIL,data);
-            System.err.println("Respuesta ---------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //retornamos la respuesta como boolean
@@ -136,7 +130,6 @@ public class GestionUsuarios {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -157,7 +150,6 @@ public class GestionUsuarios {
             data.put("telefono",telefono);
             //obtenemos la respuesta
             String respuesta = HttpRequest.postRequest(Constantes.URL_CAMBIAR_TELEFONO,data);
-            System.err.println("Respuesta ---------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             //retornamos la respuesta como boolean
@@ -169,7 +161,6 @@ public class GestionUsuarios {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }

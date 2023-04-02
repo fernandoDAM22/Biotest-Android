@@ -29,7 +29,6 @@ public class GestionCategorias {
             HashMap<String,String> param = new HashMap<>();
             param.put("pregunta",enunciado);
             String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_CATEGORIA_PREGUNTA, param);
-            System.out.println("Respuesta ---------------->" + respuesta);
             Gson gson = new Gson();
             JsonArray jsonArray = gson.fromJson(respuesta, JsonArray.class);
             return jsonArray.get(0).getAsString();

@@ -48,7 +48,6 @@ public class GestionPreguntas {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -83,7 +82,6 @@ public class GestionPreguntas {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -115,7 +113,6 @@ public class GestionPreguntas {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -137,6 +134,7 @@ public class GestionPreguntas {
                 //la parseamos
                 JsonElement element = JsonParser.parseString(respuesta);
                 String result = element.toString().replaceAll("\"","");
+                //devolvemos el resultado en forma de entero
                 return Integer.parseInt(result);
             } catch (Exception e) {
                 return -1;
@@ -147,7 +145,6 @@ public class GestionPreguntas {
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return -1;
         }
     }

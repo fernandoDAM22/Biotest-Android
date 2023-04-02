@@ -19,7 +19,7 @@ public class Vibracion {
                 // Vibra con el patrón especificado
                 vibrator.vibrate(vibrationEffect);
             } else {
-                // Si la API de Android es anterior a la versión O, utiliza el método anterior
+                // Si la API de Android es anterior a la versión 8 (Android Oreo), utiliza el método anterior
                 vibrator.vibrate(duracion);
             }
         }

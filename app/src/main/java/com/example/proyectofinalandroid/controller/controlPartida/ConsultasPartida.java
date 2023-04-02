@@ -57,7 +57,6 @@ public class ConsultasPartida {
             //retornamos el valor devuelto por el future, es decir la lista de ids
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -91,7 +90,6 @@ public class ConsultasPartida {
             //devolvemos la respuesta del future, es decir un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
 
@@ -125,7 +123,6 @@ public class ConsultasPartida {
             //retornamos el resultado devuelto por el future, es decir un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -156,7 +153,6 @@ public class ConsultasPartida {
             //retornamos el resultado devuelto por el future, es decir, un booleano
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -176,7 +172,6 @@ public class ConsultasPartida {
             data.put("partida",String.valueOf(idPartida));
             //obtenemos la respuessta
             String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
-            System.err.println(respuesta);
             //la parseamos
             Gson gson = new Gson();
             List<String[]> listaPreguntas = gson.fromJson(respuesta, new TypeToken<List<String[]>>(){}.getType());
@@ -194,7 +189,6 @@ public class ConsultasPartida {
             //devolvemos el resultado devuelto por el executor
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -212,7 +206,6 @@ public class ConsultasPartida {
             data.put("partida",String.valueOf(idPartida));
             //obtenemos la respuesta
             String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PUNTUACION,data);
-            System.err.println("Respuesta ------------> " + respuesta);
             //la parseamos
             JsonElement element = JsonParser.parseString(respuesta);
             String result = element.toString().replaceAll("\"","");
@@ -225,7 +218,6 @@ public class ConsultasPartida {
             //retornamos la respuesta devuelta por el future, es decir un numero entero
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return -1;
         }
     }
@@ -261,7 +253,6 @@ public class ConsultasPartida {
             //devolvemos el resultado devuelto por el executor
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -281,7 +272,6 @@ public class ConsultasPartida {
             data.put("partida",String.valueOf(idPartida));
             //obtenemos la respuessta
             String respuesta = HttpRequest.getRequest(Constantes.URL_OBTENER_PREGUNTAS_PARTIDA, data);
-            System.err.println(respuesta);
             //la parseamos
             Gson gson = new Gson();
             List<String[]> listaPreguntas = gson.fromJson(respuesta, new TypeToken<List<String[]>>(){}.getType());
@@ -299,7 +289,6 @@ public class ConsultasPartida {
             //devolvemos el resultado devuelto por el executor
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             return null;
         }
     }

@@ -10,16 +10,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.util.HashMap;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.RecursiveTask;
 
 /**
  * Esta clase contiene los metodos necesarios para que el
- * usuario se registre en el sistema
+ * usuario se inicie sesion en el sistema
  *
  * @author Fernando
  */

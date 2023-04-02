@@ -108,12 +108,12 @@ public class ComprobarDatos implements Patrones {
             }
         });
         try {
+            //terminamos el executor y devolvemos el resultado
             executor.shutdown();
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            return Codigos.ERROR;
         }
-        return Codigos.ERROR;
 
     }
 

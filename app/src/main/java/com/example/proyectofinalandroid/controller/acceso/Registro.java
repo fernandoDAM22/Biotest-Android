@@ -12,6 +12,11 @@ import com.google.gson.JsonParser;
 
 import java.util.HashMap;
 
+/**
+ * Esta clase contiene los metodos necesarios para que el usuario se registre
+ * en el sistema
+ * @author Fernando
+ */
 public class Registro implements Codigos {
     /**
      * Este metodo permite comprobar que los datos de registro estan correctos
@@ -51,9 +56,11 @@ public class Registro implements Codigos {
         if (!ComprobarDatos.comprobarTelefono(telefono)) {
             return ERROR_TELEFONO;
         }
+        //se comprueba si ya existe un usuario con ese nombre en la base de datos
         if (ComprobarDatos.existeUsuario(nombre) == 0) {
             return ERROR_EXISTE_USUARIO;
         }
+        //obtenemos la respuesta y retornamos codigo correspondiente
         boolean resultado = registrarUsuario(new Usuario(nombre, Cifrado.SHA256(password1), email, telefono, USUARIO_NORMAL));
         if (resultado) {
             return CORRECTO;
@@ -66,7 +73,10 @@ public class Registro implements Codigos {
 
 
     /**
-     * Este metodo inserta el usuario en la base de datos
+     * Este metodo inserta el usuario en la base de datos, en este caso no se
+     * pone dentro de un future, porque se llama desde el metodo comprobarRegistro,
+     * y la llama a ese metodo en la PantallaRegistro si esta dentro de un future, de
+     * esta forma se evitan problemas de concurrencia
      *
      * @param usuario es el usuario con los datos que vamos a insertar
      * @author Fernando
@@ -85,7 +95,5 @@ public class Registro implements Codigos {
         //parseamos la respuesta y la devolvemos como booleano
         JsonElement element = JsonParser.parseString(respuesta);
         return element.getAsBoolean();
-
     }
-
 }

@@ -93,7 +93,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
      * MetodoOptionsItemSelected sobreescrito para poderle dar funcionalidad al menu
      * @param item es el item del menu que se pulsa
      * @return true si se pulsa sobre una opcion valida del menu, false si ocurre algun error
-     * @auhor Fernando
+     * @author Fernando
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

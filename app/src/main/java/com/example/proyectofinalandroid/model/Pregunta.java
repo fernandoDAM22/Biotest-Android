@@ -109,48 +109,20 @@ public class Pregunta implements Serializable {
         return enunciado;
     }
 
-    public void setEnunciado(String enunciado) {
-        this.enunciado = enunciado;
-    }
-
     public String getRespuestaCorrecta() {
         return respuestaCorrecta;
-    }
-
-    public void setRespuestaCorrecta(String respuestaCorrecta) {
-        this.respuestaCorrecta = respuestaCorrecta;
     }
 
     public String getRespuestaIncorrecta1() {
         return respuestaIncorrecta1;
     }
 
-    public void setRespuestaIncorrecta1(String respuestaIncorrecta1) {
-        this.respuestaIncorrecta1 = respuestaIncorrecta1;
-    }
-
     public String getRespuestaIncorrecta2() {
         return respuestaIncorrecta2;
     }
 
-    public void setRespuestaIncorrecta2(String respuestaIncorrecta2) {
-        this.respuestaIncorrecta2 = respuestaIncorrecta2;
-    }
-
     public String getRespuestaIncorrecta3() {
         return respuestaIncorrecta3;
-    }
-
-    public void setRespuestaIncorrecta3(String respuestaIncorrecta3) {
-        this.respuestaIncorrecta3 = respuestaIncorrecta3;
-    }
-
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     @Override

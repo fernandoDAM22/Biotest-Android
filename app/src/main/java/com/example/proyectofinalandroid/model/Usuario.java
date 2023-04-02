@@ -48,23 +48,6 @@ public class Usuario {
     }
 
     /**
-     * Este constructor coloca el tipo de usuario a user por defecto
-     * @param id es el id de la persona
-     * @param nombre es el nombre de la persona
-     * @param password es la contraseña cifrada de la persona
-     * @param email es el email de la persona
-     * @param telefono es el telefono de la persona
-     */
-    public Usuario(int id, String nombre, String password, String email, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.password = password;
-        this.email = email;
-        this.telefono = telefono;
-        //TODO: colocar el tipo de usuario a user
-    }
-
-    /**
      * Constructor parametrizado
      * @param id es el id de la persona
      * @param nombre es el nombre de la persona
@@ -93,17 +76,6 @@ public class Usuario {
         this.email = email;
         this.telefono = telefono;
         this.tipo = tipo;
-    }
-
-    /**
-     * Este metodo retorna un ArrayList de String con el nombre, email, telefono y tipo de un usuario,
-     * se usa para colocar los usuarios en la tabla de la VentanaGestionUsuarios, no se incluye la contraseña
-     * en el array puesto que no se muestra en la tabla
-     * @return un Array con el nombre, email, telefono y tipo del usuario
-     * @author Fernando
-     */
-    public String[] convertir(){
-        return new String[]{nombre,email,telefono,tipo};
     }
 
     public int getId() {
@@ -148,10 +120,6 @@ public class Usuario {
 
     public String getTipo() {
         return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     @Override
