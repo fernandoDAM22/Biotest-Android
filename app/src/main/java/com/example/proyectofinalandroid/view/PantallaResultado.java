@@ -194,8 +194,7 @@ public class PantallaResultado extends AppCompatActivity {
         // Creamos un ArrayList de Strings con el contenido de las preguntas y su estado (acertada o no)
         ArrayList<Pair<String, Boolean>> contenidoPreguntas = new ArrayList<>();
         for (String[] pregunta : preguntas) {
-            int idPregunta = GestionPreguntas.obtenerIdPregunta(pregunta[0]);
-            boolean preguntaAcertada = GestionPreguntas.preguntaAcertada(idPartida, idPregunta); // aquí debes llamar al método que verifica si la pregunta fue acertada
+            boolean preguntaAcertada = GestionPreguntas.preguntaAcertada(idPartida, pregunta[0]); // aquí debes llamar al método que verifica si la pregunta fue acertada
             contenidoPreguntas.add(new Pair<>(pregunta[0], preguntaAcertada)); // aquí debes sustituir 0 por el índice que corresponda a la pregunta
         }
 
@@ -350,8 +349,7 @@ public class PantallaResultado extends AppCompatActivity {
         cadena.append("PUNTUACION ===> ").append(partida.getPuntuacion()).append("\n");
         cadena.append("PREGUNTAS RESPONDIDAS: ").append("\n");
         for(Pregunta p: partida.getPreguntas()){
-            idPregunta = GestionPreguntas.obtenerIdPregunta(p.getEnunciado());
-            acertada = GestionPreguntas.preguntaAcertada(idPartida,idPregunta);
+            acertada = GestionPreguntas.preguntaAcertada(idPartida,p.getEnunciado());
             if(acertada){
                 texto = "SI";
             }else{

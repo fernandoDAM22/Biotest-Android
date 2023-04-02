@@ -91,17 +91,17 @@ public class GestionPreguntas {
     /**
      * Este metodo permite saber si una pregunta fue acertada o no en una partida
      * @param idPartida es el id de la partida en la que se respondio la pregunta
-     * @param idPregunta es el id de la pregunta que se respondio
+     * @param enunciado es el enunciado de la pregunta
      * @return true si fue acertada, false si no
      * @author Fernando
      */
-    public static boolean preguntaAcertada(int idPartida, int idPregunta) {
+    public static boolean preguntaAcertada(int idPartida, String enunciado) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Boolean> future = executor.submit(() -> {
             //creamos el mapa con los parametros necesarios
             HashMap<String, String> params = new HashMap<>();
             params.put("idPartida", String.valueOf(idPartida));
-            params.put("idPregunta", String.valueOf(idPregunta));
+            params.put("enunciado",enunciado);
             //obtenemos la respuesta
             String respuesta = HttpRequest.getRequest(Constantes.URL_PREGUNTA_ACERTADA, params);
             JsonElement element = JsonParser.parseString(respuesta);

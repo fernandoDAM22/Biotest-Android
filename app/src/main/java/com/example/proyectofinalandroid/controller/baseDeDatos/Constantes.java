@@ -6,7 +6,7 @@ package com.example.proyectofinalandroid.controller.baseDeDatos;
  * @author Fernando
  */
 public interface Constantes {
-    String SERVER = "http://192.168.126.189/webserviceProyecto/";
+    String SERVER = "http://192.168.1.79/webserviceProyecto/";
     String URL_LOGIN = SERVER + "acceso/login.php";
     String URL_EXISTE_USUARIO =  SERVER + "acceso/existeUsuario.php";
     String URL_REGISTRO = SERVER + "acceso/registro.php";
