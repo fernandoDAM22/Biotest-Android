@@ -1,6 +1,7 @@
 package com.example.proyectofinalandroid.controller.controlPartida;
 
 
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.Button;
@@ -87,7 +88,16 @@ public abstract class GestionPartida {
     public void colocarRespuestas(Button boton, String texto) {
         Typeface tipoDeFuente = Typeface.create("Arial", Typeface.BOLD);
         boton.setTypeface(tipoDeFuente);
-        boton.setTextSize(14);
+        int longitud = texto.length();
+        if(longitud <= 6){
+            boton.setTextSize(22);
+        }else if (longitud <= 10){
+            boton.setTextSize(20);
+        }else if(longitud < 15){
+            boton.setTextSize(18);
+        }else {
+            boton.setTextSize(16);
+        }
         boton.setText(texto);
     }
     /**
