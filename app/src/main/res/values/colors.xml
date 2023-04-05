@@ -12,21 +12,23 @@
     <!-- Color azul de los botones -->
     <color name="color_azul_botones">#48DBFF</color>
     <!-- Color de los botones de cancelar -->
-    <color name="color_botones_cancelar">#EE5253</color>
+    <color name="color_botones_cancelar">#EB3B5A</color>
     <!-- Color de los botones de aceptar -->
-    <color name="color_botones_aceptar">#1DD1A1</color>
+    <color name="color_botones_aceptar">#20BF6B</color>
     <!-- Color de los ToggleButtons cuando no estan seleccionados-->
-    <color name="color_boton_apagado">#48DBFB</color>
+    <color name="color_boton_apagado">#2D98DA</color>
     <!--    Color de los ToggleButtons cuando estan seleccionados-->
     <color name="color_boton_encendido">#341f97</color>
     <!-- Color de fondo de la pantallas excepto de la de login y registro-->
     <color name="color_fondo_pantallas">#3C3F41</color>
     <!-- Color que se le pone al boton con la respuesta correcta -->
-    <color name="color_correcto">#2ECC71</color>
+    <color name="color_correcto">#17BF6B</color>
     <!-- Color que se le pone al boton con la respuesta incorrecta-->
-    <color name="color_incorrecto">#E74C3C</color>
+    <color name="color_incorrecto">#FC5C65</color>
     <!-- Color que se le pone a las preguntas acertadas en la pantalla resultado-->
-    <color name="color_preguntas_acertadas">#A5FFD6</color>
+    <color name="color_preguntas_acertadas">#20BF6B</color>
     <!-- Color que se le pone a las preguntas falladas en la pantalla resultado-->
-    <color name="color_preguntas_falladas">#FF686B</color>
+    <color name="color_preguntas_falladas">#FC5C65</color>
+    <!--  Color que se le pone a los textos  -->
+    <color name="color_blanco">#BBB</color>
 </resources>
