@@ -33,4 +33,5 @@ public interface Constantes {
     String URL_OBTENER_PARTIDA = SERVER + "admin/partidas/obtenerPartida.php";
 
     String EMAIL = "BioTestProyecto@gmail.com";
+    String URL_LICENCIA = "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es";
 }

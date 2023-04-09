@@ -21,6 +21,8 @@
         </menu>
 
     </item>
+    <item android:id="@+id/item_licencia"
+        android:title="Licencia" />
     <item
         android:title="Cerrar sesion"
         android:id="@+id/item_cerrar_sesion"

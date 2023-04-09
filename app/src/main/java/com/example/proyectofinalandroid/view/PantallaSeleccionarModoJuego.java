@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.widget.ToggleButton;
 
 import com.example.proyectofinalandroid.MainActivity;
 import com.example.proyectofinalandroid.R;
+import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionCuestionarios;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.controller.tools.Mensajes;
@@ -123,6 +125,11 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
                 return true;
             case R.id.item_cambiar_email:
                 intent = new Intent(this,PantallaCambiarEmail.class);
+                startActivity(intent);
+                return true;
+            case R.id.item_licencia:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constantes.URL_LICENCIA));
                 startActivity(intent);
                 return true;
         }

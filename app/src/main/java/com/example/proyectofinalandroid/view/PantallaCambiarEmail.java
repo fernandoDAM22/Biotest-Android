@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.proyectofinalandroid.MainActivity;
 import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Login;
+import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
@@ -106,6 +109,11 @@ public class PantallaCambiarEmail extends AppCompatActivity {
                 return true;
             case R.id.item_cambiar_email:
                 intent = new Intent(this,PantallaCambiarEmail.class);
+                startActivity(intent);
+                return true;
+            case R.id.item_licencia:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constantes.URL_LICENCIA));
                 startActivity(intent);
                 return true;
         }

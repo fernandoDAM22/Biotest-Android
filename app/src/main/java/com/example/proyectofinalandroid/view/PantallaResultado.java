@@ -138,6 +138,11 @@ public class PantallaResultado extends AppCompatActivity {
                 intent = new Intent(this,PantallaCambiarEmail.class);
                 startActivity(intent);
                 return true;
+            case R.id.item_licencia:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constantes.URL_LICENCIA));
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
