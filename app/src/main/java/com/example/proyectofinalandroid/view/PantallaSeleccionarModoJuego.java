@@ -39,27 +39,27 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
     /**
      * Color que se le asigna a los toggleButtons cuando estan seleccionados
      */
-    int colorON;
+    private int colorON;
     /**
      * Color que se le asigna a los toggleButtons cuando no estan seleccionados
      */
-    int colorOFF;
+    private int colorOFF;
     /**
      * Boton que permite seleccionar el modo clasico
      */
-    ToggleButton btnModoClasico;
+    private ToggleButton btnModoClasico;
     /**
      * Boton que permite seleccionar el modo sin fallos
      */
-    ToggleButton btnModoSinFallos;
+    private ToggleButton btnModoSinFallos;
     /**
      * Boton que permite seleccionar el modo libre
      */
-    ToggleButton btnModoLibre;
+    private ToggleButton btnModoLibre;
     /**
      * Boton que permite seleccionar el modo cuestionarios
      */
-    ToggleButton btnModoCuestionarios;
+    private ToggleButton btnModoCuestionarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -154,7 +154,7 @@ public class PantallaCambiarEmail extends AppCompatActivity {
             limpiarCampos();
             txtEmailActual.setText("Email actual: " + Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_EMAIL));
         }else{
-            CrearToast.toastLargo("Error al cambiar el nombre de usuario",getApplicationContext()).show();
+            CrearToast.toastLargo("Error al cambiar el email",getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

@@ -35,15 +35,15 @@ public class PantallaCambiarTelefono extends AppCompatActivity {
     /**
      * Input para la contrasena
      */
-    EditText txtPassword;
+    private EditText txtPassword;
     /**
      * Input para el telefono
      */
-    EditText txtTelefono;
+    private EditText txtTelefono;
     /**
      * TextView para el telefono actual del usuario
      */
-    TextView txtTelefonoActual;
+    private TextView txtTelefonoActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

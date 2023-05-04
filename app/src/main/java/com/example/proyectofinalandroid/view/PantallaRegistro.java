@@ -27,23 +27,23 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
     /**
      * Es el campo para el nombre del usuario
      */
-    TextView txtNombre;
+    private TextView txtNombre;
     /**
      * Es el campo para la contraseña del usuario
      */
-    TextView txtPassword;
+    private TextView txtPassword;
     /**
      * Es el campo para la repeticion de la contraseña del usuario
      */
-    TextView txtPassword2;
+    private TextView txtPassword2;
     /**
      * Es el campo para el email del usuario
      */
-    TextView txtEmail;
+    private TextView txtEmail;
     /**
      * Es el campo para el telefono del usuario
      */
-    TextView txtTelefono;
+    private TextView txtTelefono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

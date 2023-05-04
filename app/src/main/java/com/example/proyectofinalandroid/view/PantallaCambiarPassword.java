@@ -34,15 +34,15 @@ public class PantallaCambiarPassword extends AppCompatActivity {
     /**
      * Input para la contrasena antigua
      */
-    EditText txtOldPassword;
+    private EditText txtOldPassword;
     /**
      * Input para la contrasena nueva
      */
-    EditText txtNewPassword;
+    private EditText txtNewPassword;
     /**
      * Input para la repeticion de la nueva contrasena
      */
-    EditText txtNewPassword2;
+    private EditText txtNewPassword2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

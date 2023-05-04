@@ -35,11 +35,11 @@ public class PantallaJugar extends AppCompatActivity {
     /**
      * Tipo de partida que se esta jugando
      */
-    TipoPartida tipoPartida;
+    private TipoPartida tipoPartida;
     /**
      * Cuestionario que se resuelve en caso de que el modo elegido sea modo cuestionario
      */
-    String cuestionario;
+    private String cuestionario;
     /**
      * Botones con las diferentes respuestas de la pregunta
      */
