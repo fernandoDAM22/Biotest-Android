@@ -23,6 +23,7 @@ import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
@@ -31,6 +32,7 @@ import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
  * @author Fernando
  */
 public class PantallaCambiarNombreUsuario extends AppCompatActivity {
+    public static final String ERROR_EXISTE_USUARIO = "Error, ya existe un usuario con ese nombre";
     /**
      * Input para la contrasena del usuario
      */
@@ -127,36 +129,36 @@ public class PantallaCambiarNombreUsuario extends AppCompatActivity {
         String username = txtUsername.getText().toString();
         //se comprueba que los datos no esten vacios
         if(password.equals("") || username.equals("")){
-            CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMPOS_VACIOS,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos la contrasena  sea la del usuario
         if(!Cifrado.SHA256(password).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
-            CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_PASSWORD_ACTUAL_INCORRECTA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //se comprueba que el nombre de usuario cumpla con los requisitos
         if(!ComprobarDatos.comprobarNombre(username)){
-            CrearToast.toastLargo("Error, el nombre de usuario no cumple con los requisitos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_REQUSITOS_EMAIL,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //se comprueba que no exista ya alguien con ese usuario
         if(ComprobarDatos.existeUsuario(username) == 0){
-            CrearToast.toastLargo("Error, ya existe un usuario con ese nombre",getApplicationContext()).show();
+            CrearToast.toastLargo(ERROR_EXISTE_USUARIO,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //Se modifica el nombre de usuario y se muestra el mensaje de error correspondiente
         if(GestionUsuarios.modificarNombre(ConfiguracionUsuario.getNombreUsuario(),username)){
-            CrearToast.toastLargo("Nombre de usuario cambiado correctamete",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.CAMBIO_USERNAME_CORRECTO,getApplicationContext()).show();
             ConfiguracionUsuario.setNombreUsuario(username);
             txtUsuarioActual.setText("Usuario actual: " + ConfiguracionUsuario.getNombreUsuario());
             limpiarCampos();
         }else{
-            CrearToast.toastLargo("Error al cambiar el nombre de usuario",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMBIO_USERNAME,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

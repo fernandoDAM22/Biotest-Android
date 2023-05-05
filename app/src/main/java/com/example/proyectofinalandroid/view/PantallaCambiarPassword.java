@@ -23,6 +23,7 @@ import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
@@ -31,6 +32,7 @@ import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
  * @author Fernando
  */
 public class PantallaCambiarPassword extends AppCompatActivity {
+    public static final String ERROR_FORMATO_PASSWORD = "La contraseña no cumple con los requisitos";
     /**
      * Input para la contrasena antigua
      */
@@ -130,34 +132,34 @@ public class PantallaCambiarPassword extends AppCompatActivity {
         String newPassword2 = txtNewPassword2.getText().toString();
         //comprobamos que los campos no esten vacios
         if(oldPassword.equals("") || newPassword.equals("") || newPassword2.equals("")){
-            CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMPOS_VACIOS,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos la contrasena vieja sea la del usuario
         if(!Cifrado.SHA256(oldPassword).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
-            CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_PASSWORD_ACTUAL_INCORRECTA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos que las dos contrasenas sean iguales
         if(!ComprobarDatos.comprobarPassword(newPassword,newPassword2)){
-            CrearToast.toastLargo("Las contraseñas no coinciden",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_PASSWORDS,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos que la contraseña cumpla con los requisitos
         if(!ComprobarDatos.comprobarFormatoPassword(newPassword)){
-            CrearToast.toastLargo("La contraseña no cumple con los requisitos",getApplicationContext()).show();
+            CrearToast.toastLargo(ERROR_FORMATO_PASSWORD,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //cambiamos la contrasena y mostramos el mensaje correspondiente
         if(GestionUsuarios.cambiarPassword(ConfiguracionUsuario.getNombreUsuario(),Cifrado.SHA256(newPassword))){
-            CrearToast.toastLargo("Contraseña cambiada correctamente",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.CAMBIO_PASSWORD_CORRECTO,getApplicationContext()).show();
             limpiarCampos();
         }else{
-            CrearToast.toastLargo("Error al cambiar la contraseña",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMBIO_CONTRASEÑA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

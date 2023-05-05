@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutionException;
  * @author Fernando
  */
 public class PantallaSeleccionarModoJuego extends AppCompatActivity {
+    public static final String ERROR_CUESTIONARIOS_DISPONIBLES = "No hay cuestionarios disponibles";
     /**
      * Color que se le asigna a los toggleButtons cuando estan seleccionados
      */
@@ -258,7 +259,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         ToggleButton boton = obtenerBotonSeleccionado(findViewById(R.id.grupoBotones));
         //en caso de que sea nulo
         if(boton == null){
-            CrearToast.toastLargo("No has seleccionado ningun boton",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_SELECCION_BOTON,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
@@ -296,7 +297,7 @@ public class PantallaSeleccionarModoJuego extends AppCompatActivity {
         }
 
         if (cuestionarios == null || cuestionarios.isEmpty()) {
-            CrearToast.toastLargo("No hay cuestionarios disponibles",getApplicationContext()).show();
+            CrearToast.toastLargo(ERROR_CUESTIONARIOS_DISPONIBLES,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }

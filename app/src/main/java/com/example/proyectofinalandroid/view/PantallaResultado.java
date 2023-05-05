@@ -8,19 +8,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
-import android.provider.Telephony;
-import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.proyectofinalandroid.MainActivity;
 import com.example.proyectofinalandroid.R;
@@ -29,14 +24,13 @@ import com.example.proyectofinalandroid.controller.acceso.Login;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionCategorias;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
-import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.controlPartida.ConsultasPartida;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 import com.example.proyectofinalandroid.model.Partida;
 import com.example.proyectofinalandroid.model.Pregunta;
-import com.example.proyectofinalandroid.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -47,6 +41,7 @@ import java.util.TimerTask;
  * @author Fernando
  */
 public class PantallaResultado extends AppCompatActivity {
+
     /**
      * Contador para el boton de atras, su funcion es que el usuario tenga que dar
      * dos veces al boton para retroceder y evitar pulsaciones accidentales
@@ -162,7 +157,7 @@ public class PantallaResultado extends AppCompatActivity {
     public void onBackPressed() {
         if (backPressCount == 0) {
             backPressCount++;
-            CrearToast.toastCorto("Pulse de nuevo para salir", getApplicationContext()).show();
+            CrearToast.toastCorto(Mensajes.MENSAJE_PULSAR_SALIR, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
 
             backPressTimer = new Timer();
@@ -188,7 +183,7 @@ public class PantallaResultado extends AppCompatActivity {
      */
     private void cargarLista() {
         if (idPartida == -1) {
-            CrearToast.toastCorto("No se ha podido obtener las preguntas de la partida", getApplicationContext()).show();
+            CrearToast.toastCorto(Mensajes.ERROR_OBTENER_PREGUNTAS, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
         //obtenemos los colores que le vamos a poner a la lista
@@ -246,7 +241,7 @@ public class PantallaResultado extends AppCompatActivity {
         int id = GestionPreguntas.obtenerIdPregunta(enunciado);
         Pregunta pregunta = GestionPreguntas.obtenerDatos(id);
         if (pregunta == null) {
-            CrearToast.toastCorto("Error al obtener los datos de la pregunta", getApplicationContext());
+            CrearToast.toastCorto(Mensajes.ERROR_OBTENER_DATOS_PREGUNTA, getApplicationContext());
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -307,7 +302,7 @@ public class PantallaResultado extends AppCompatActivity {
     public void salir(View view){
         if (exitCount == 0) {
             exitCount++;
-            CrearToast.toastCorto("Pulse de nuevo para salir", getApplicationContext()).show();
+            CrearToast.toastCorto(Mensajes.MENSAJE_PULSAR_SALIR, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
 
             backPressTimer = new Timer();
@@ -347,12 +342,12 @@ public class PantallaResultado extends AppCompatActivity {
         boolean acertada;
         String texto;
         StringBuilder cadena = new StringBuilder();
-        cadena.append("-----RESUMEN PARTIDA-----\n");
-        cadena.append("USUARIO ===> " ).append(ConfiguracionUsuario.getNombreUsuario()).append("\n");
-        cadena.append("FECHA ===> ").append(partida.getFecha()).append("\n");
-        cadena.append("TIPO ===> ").append(partida.getTipo()).append("\n");
-        cadena.append("PUNTUACION ===> ").append(partida.getPuntuacion()).append("\n");
-        cadena.append("PREGUNTAS RESPONDIDAS: ").append("\n");
+        cadena.append(Mensajes.TITULO_RESUMEN);
+        cadena.append(Mensajes.TEXTO_USUARIO_RESUMEN).append(ConfiguracionUsuario.getNombreUsuario()).append("\n");
+        cadena.append(PantallaJugar.TEXTO_FECHA_RESUMEN).append(partida.getFecha()).append("\n");
+        cadena.append(Mensajes.TEXTO_TIPO_RESUMEN).append(partida.getTipo()).append("\n");
+        cadena.append(Mensajes.TEXTO_PUNTUACION_RESUMEN).append(partida.getPuntuacion()).append("\n");
+        cadena.append(Mensajes.TEXTO_PREGUNTAS_RESUMEN).append("\n");
         for(Pregunta p: partida.getPreguntas()){
             acertada = GestionPreguntas.preguntaAcertada(idPartida,p.getEnunciado());
             if(acertada){
@@ -380,13 +375,13 @@ public class PantallaResultado extends AppCompatActivity {
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "RESUMEN PARTIDA");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, Mensajes.TEXTO_TITULO_RESUMEN);
         emailIntent.putExtra(Intent.EXTRA_TEXT, crearResumen(partida).toString());
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Enviar correo electrónico..."));
+            startActivity(Intent.createChooser(emailIntent, Mensajes.TEXTO_ENVIAR_CORREO));
         } catch (android.content.ActivityNotFoundException ex) {
-            CrearToast.toastLargo("No hay clientes de correo electronico instalados",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CLIENTES_EMAIL,getApplicationContext()).show();
         }
     }
 }

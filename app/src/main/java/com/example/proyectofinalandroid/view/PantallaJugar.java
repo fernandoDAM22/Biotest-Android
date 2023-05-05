@@ -21,6 +21,7 @@ import com.example.proyectofinalandroid.controller.controlPartida.PartidaModoCla
 import com.example.proyectofinalandroid.controller.controlPartida.PartidaModoLibre;
 import com.example.proyectofinalandroid.controller.controlPartida.PartidaModoSinFallos;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.TipoPartida;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
@@ -32,6 +33,8 @@ import com.example.proyectofinalandroid.model.Partida;
  * @author Fernando
  */
 public class PantallaJugar extends AppCompatActivity {
+    public static final String ERROR_PREGUNTA_RESPONDIDA = "Ya has respondido a la pregunta";
+    public static final String TEXTO_FECHA_RESUMEN = "FECHA ===> ";
     /**
      * Tipo de partida que se esta jugando
      */
@@ -115,7 +118,7 @@ public class PantallaJugar extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        CrearToast.toastCorto("No se puede volver atras hasta que finalices la partida", getApplicationContext()).show();
+        CrearToast.toastCorto(Mensajes.MENSAJE_VOLVER_EN_PARTIDA, getApplicationContext()).show();
         Vibracion.vibrar(getApplicationContext(), 100);
     }
 
@@ -198,7 +201,7 @@ public class PantallaJugar extends AppCompatActivity {
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
             //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
-            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_INICIAR_PARTIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -218,7 +221,7 @@ public class PantallaJugar extends AppCompatActivity {
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
             //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
-            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_INICIAR_PARTIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -238,7 +241,7 @@ public class PantallaJugar extends AppCompatActivity {
         //nos aseguramos de que no hayan errores al obtener los datos
         if (idPartida == -1 || idUsuario == -1) {
             //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
-            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_INICIAR_PARTIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -260,7 +263,7 @@ public class PantallaJugar extends AppCompatActivity {
         iniciarPartida();
         if (idPartida == -1 || idUsuario == -1) {
             //en caso de no poder crear la partida avisamos al usuario y hacemos vibrar el telefono
-            CrearToast.toastLargo("No se ha podido inicar la partida", getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_INICIAR_PARTIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -316,7 +319,7 @@ public class PantallaJugar extends AppCompatActivity {
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
         } else {
             //indicamos al usuario que esa pregunta ya esta respondida
-            CrearToast.toastLargo("Ya has respondido a la pregunta", getApplicationContext()).show();
+            CrearToast.toastLargo(ERROR_PREGUNTA_RESPONDIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
@@ -341,7 +344,7 @@ public class PantallaJugar extends AppCompatActivity {
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
         } else {
             //indicamos al usuario que esa pregunta ya esta respondida
-            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            CrearToast.toastCorto(ERROR_PREGUNTA_RESPONDIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
@@ -366,7 +369,7 @@ public class PantallaJugar extends AppCompatActivity {
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
         } else {
             //indicamos al usuario que esa pregunta ya esta respondida
-            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            CrearToast.toastCorto(ERROR_PREGUNTA_RESPONDIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
@@ -391,7 +394,7 @@ public class PantallaJugar extends AppCompatActivity {
             ConsultasPartida.insertarPregunta(partida.getId(), idPregunta, acertada);
         } else {
             //indicamos al usuario que esa pregunta ya esta respondida
-            CrearToast.toastCorto("Ya has respondido a la pregunta", getApplicationContext()).show();
+            CrearToast.toastCorto(ERROR_PREGUNTA_RESPONDIDA, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
         }
     }
@@ -405,7 +408,7 @@ public class PantallaJugar extends AppCompatActivity {
     public void siguiente(View view) {
         //nos aseguramos de que la pregunta no ha sido ya respondida
         if (bandera) {
-            CrearToast.toastCorto("Debe responder a la pregunta antes de pasar a la siguiente", getApplicationContext()).show();
+            CrearToast.toastCorto(Mensajes.ERROR_RESPONDER_PRIMERO, getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(), 100);
             return;
         }
@@ -497,7 +500,7 @@ public class PantallaJugar extends AppCompatActivity {
      */
     public void finalizar(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Está seguro de que desea finalizar?");
+        builder.setMessage(Mensajes.MENSAJE_CONFIRMACION_FINALIZAR);
         builder.setPositiveButton("Aceptar", (dialog, which) -> lanzarVentanaResultado());
         builder.setNegativeButton("Cancelar", null);
         AlertDialog dialog = builder.create();

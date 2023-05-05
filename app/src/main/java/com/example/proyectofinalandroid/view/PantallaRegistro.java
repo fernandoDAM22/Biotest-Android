@@ -11,6 +11,7 @@ import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Registro;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 
 import java.util.concurrent.ExecutionException;
@@ -67,7 +68,7 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
         //Creamos el dialogo
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmacion");
-        builder.setMessage("Estas seguro de que quieres registrarse");
+        builder.setMessage(Mensajes.MENSAJE_CONFIRMACION_REGISTRO);
         //la acion de registrarse solo se llevara a cabo si se pulsa el boton de aceptar
         builder.setPositiveButton("Aceptar", (dialog, which) -> {
             try {
@@ -78,31 +79,31 @@ public class PantallaRegistro extends AppCompatActivity implements Codigos {
                 switch (estado) {
                     //en funcion del codigo devuelto mostratemos un mensaje u otro
                     case ERROR_CAMPOS_VACIOS:
-                        mensaje = "Error, rellene todos los campos";
+                        mensaje = Mensajes.ERROR_CAMPOS_VACIOS;
                         break;
                     case ERROR_NOMBRE:
-                        mensaje = "Error, el nombre no es correcto";
+                        mensaje = Mensajes.ERROR_FORMATO_USERNAME;
                         break;
                     case ERROR_EMAIL:
-                        mensaje = "Error, el email no es correcto";
+                        mensaje = Mensajes.ERROR_REQUISTOS_EMAIL;
                         break;
                     case ERROR_FORMATO_PASSWORD:
-                        mensaje = "Error, el formato de la contraseña no es correcto";
+                        mensaje = Mensajes.ERROR_FORMATO_PASSWORD;
                         break;
                     case ERROR_PASSWORDS:
-                        mensaje = "Error, las contraseñas no coinciden";
+                        mensaje = Mensajes.ERROR_PASSWORDS;
                         break;
                     case ERROR_TELEFONO:
-                        mensaje = "Error, el telefono no es correcto";
+                        mensaje = Mensajes.ERROR_FORMATO_TELEFONO;
                         break;
                     case ERROR_EXISTE_USUARIO:
-                        mensaje = "Error, ya existe un usuario con ese nombre";
+                        mensaje = Mensajes.ERROR_EXISTE_USERNAME;
                         break;
                     case CANCELADO:
-                        mensaje = "Operacion cancelada";
+                        mensaje = Mensajes.OPERACION_CANCELADA;
                         break;
                     case CORRECTO:
-                        mensaje = "Usuario registrado correctamente";
+                        mensaje = Mensajes.MENSAJE_USUARIO_REGISTRADO_CORRECTAMENTE;
                         break;
                 }
                 //mostramos el toast con el mensaje correspondiente

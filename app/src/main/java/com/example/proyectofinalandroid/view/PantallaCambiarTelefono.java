@@ -23,6 +23,7 @@ import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
@@ -32,6 +33,7 @@ import java.util.Locale;
  * Esta clase pinta la pantalla que permite al usuario cambiar su telefono
  */
 public class PantallaCambiarTelefono extends AppCompatActivity {
+    public static final String ERROR_CAMBIO_TELEFONO = "Error al cambiar el telefono";
     /**
      * Input para la contrasena
      */
@@ -130,29 +132,29 @@ public class PantallaCambiarTelefono extends AppCompatActivity {
         String telefono = txtTelefono.getText().toString();
         //se comprueba que los datos no esten vacios
         if(password.equals("") ||telefono.equals("")){
-            CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMPOS_VACIOS,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos la contrasena sea la del usuario
         if(!Cifrado.SHA256(password).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
-            CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_PASSWORD_INCORRECTA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //se comprueba que el telefono cumpla con los requisitos
         if(!ComprobarDatos.comprobarTelefono(telefono)){
-            CrearToast.toastLargo("Error, el telefono no cumple con los requistos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_FORMATO_TELEFONO,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //se cambia el telefono y se muestra el mensaje correspondiente
         if(GestionUsuarios.cambiarTelefono(ConfiguracionUsuario.getNombreUsuario(),telefono)){
-            CrearToast.toastLargo("Telefono cambiado correctamete",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.CAMBIO_TELEFONO_CORRECTO,getApplicationContext()).show();
             limpiarCampos();
             txtTelefonoActual.setText("Telefono actual: " + Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_TELEFONO));
         }else{
-            CrearToast.toastLargo("Error al cambiar el telefono",getApplicationContext()).show();
+            CrearToast.toastLargo(ERROR_CAMBIO_TELEFONO,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

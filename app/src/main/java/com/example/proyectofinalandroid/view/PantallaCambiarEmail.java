@@ -24,6 +24,7 @@ import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.tools.Cifrado;
 import com.example.proyectofinalandroid.controller.tools.ComprobarDatos;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 
@@ -132,29 +133,29 @@ public class PantallaCambiarEmail extends AppCompatActivity {
         String email = txtEmail.getText().toString();
         //comprobamos que os campos no esten vacios
         if(password.equals("") || email.equals("")){
-            CrearToast.toastLargo("Rellene todos los campos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMPOS_VACIOS,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos la contrasena sea la del usuario
         if(!Cifrado.SHA256(password).equals(Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(), Codigos.OBTENER_PASSWORD))){
-            CrearToast.toastLargo("La contraseña actual no es correcta",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_PASSWORD_ACTUAL_INCORRECTA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //comprobamos que el email cumple con los requisitos
         if(!ComprobarDatos.comprobarCorreo(email)){
-            CrearToast.toastLargo("Error, el email no cumple con los requistos",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_REQUISTOS_EMAIL,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
             return;
         }
         //cambiamos el email al usuario y mostramos el mensaje correspondiente
         if(GestionUsuarios.cambiarEmail(ConfiguracionUsuario.getNombreUsuario(),email)){
-            CrearToast.toastLargo("Email cambiado correctamete",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.CAMBIO_EMAIL_CORRECTO,getApplicationContext()).show();
             limpiarCampos();
             txtEmailActual.setText("Email actual: " + Login.obtenerDatos(ConfiguracionUsuario.getNombreUsuario(),Codigos.OBTENER_EMAIL));
         }else{
-            CrearToast.toastLargo("Error al cambiar el email",getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMBIAR_EMAIL,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

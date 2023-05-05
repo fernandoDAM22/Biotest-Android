@@ -9,6 +9,7 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.view.PantallaRegistro;
 import com.example.proyectofinalandroid.view.PantallaSeleccionarModoJuego;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
@@ -55,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements Codigos {
             int resultado = future.get();
             String mensaje = "";
             if(resultado == ERROR_CAMPOS_VACIOS){
-                mensaje = "Error, rellene todos los campos";
+                mensaje = Mensajes.ERROR_CAMPOS_VACIOS;
             }else if(resultado == ERROR_NO_EXISTE_USUARIO){
-                mensaje = "Error, no existe el usuario";
+                mensaje = Mensajes.ERROR_NO_EXISTE_USUARIO;
             }else if(resultado == Codigos.ERROR_PASSWORD_INCORRECTA){
-                mensaje = "Error, contraseña incorrecta";
+                mensaje = Mensajes.ERROR_PASSWORD_INCORRECTA;
             }
             //mostramos el mensaje de error en caso de que haya ocurrido
             if(resultado < 0){
