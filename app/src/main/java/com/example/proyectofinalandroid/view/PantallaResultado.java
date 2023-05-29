@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.proyectofinalandroid.MainActivity;
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Login;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
@@ -35,6 +34,7 @@ import com.example.proyectofinalandroid.model.Pregunta;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Esta clase permite gestionar la pantalla que permite al usuario jugar una partida

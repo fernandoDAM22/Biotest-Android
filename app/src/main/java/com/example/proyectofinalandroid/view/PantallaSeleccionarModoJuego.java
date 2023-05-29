@@ -28,6 +28,7 @@ import com.example.proyectofinalandroid.controller.tools.Vibracion;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Esta clase se encarga de gestionar la pantalla que permite al

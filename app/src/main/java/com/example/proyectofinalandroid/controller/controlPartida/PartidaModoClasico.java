@@ -1,13 +1,11 @@
 package com.example.proyectofinalandroid.controller.controlPartida;
 
 import android.content.Context;
-import android.service.controls.templates.ControlTemplate;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionPreguntas;
 import com.example.proyectofinalandroid.controller.tools.PilaSinRepetidos;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
@@ -17,6 +15,7 @@ import com.example.proyectofinalandroid.model.Pregunta;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Esta clase nos permite jugar una partida en modo clasico

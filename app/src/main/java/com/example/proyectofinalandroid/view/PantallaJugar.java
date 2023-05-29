@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.baseDeDatos.GestionUsuarios;
 import com.example.proyectofinalandroid.controller.controlPartida.ConsultasPartida;
 import com.example.proyectofinalandroid.controller.controlPartida.GestionPartida;
@@ -26,6 +25,7 @@ import com.example.proyectofinalandroid.controller.tools.TipoPartida;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
 import com.example.proyectofinalandroid.model.Partida;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Esta clase permite al usuario jugar una partida en los diferentes modos de juego

@@ -30,5 +30,5 @@
     <!-- Color que se le pone a las preguntas falladas en la pantalla resultado-->
     <color name="color_preguntas_falladas">#FC5C65</color>
     <!--  Color que se le pone a los textos  -->
-    <color name="color_blanco">#BBB</color>
+    <color name="color_blanco">#FFF</color>
 </resources>

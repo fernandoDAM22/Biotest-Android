@@ -12,10 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.proyectofinalandroid.MainActivity;
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Login;
 import com.example.proyectofinalandroid.controller.baseDeDatos.Constantes;
@@ -26,6 +24,7 @@ import com.example.proyectofinalandroid.controller.tools.CrearToast;
 import com.example.proyectofinalandroid.controller.tools.Mensajes;
 import com.example.proyectofinalandroid.controller.tools.Vibracion;
 import com.example.proyectofinalandroid.controller.usuario.ConfiguracionUsuario;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Este clase pinta la pantalla que permite al usuario cambiar su contrasena
@@ -159,7 +158,7 @@ public class PantallaCambiarPassword extends AppCompatActivity {
             CrearToast.toastLargo(Mensajes.CAMBIO_PASSWORD_CORRECTO,getApplicationContext()).show();
             limpiarCampos();
         }else{
-            CrearToast.toastLargo(Mensajes.ERROR_CAMBIO_CONTRASEÑA,getApplicationContext()).show();
+            CrearToast.toastLargo(Mensajes.ERROR_CAMBIO_CONTRASENA,getApplicationContext()).show();
             Vibracion.vibrar(getApplicationContext(),100);
         }
     }

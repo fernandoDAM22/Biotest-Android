@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.controller.acceso.Codigos;
 import com.example.proyectofinalandroid.controller.acceso.Registro;
 import com.example.proyectofinalandroid.controller.tools.CrearToast;
@@ -19,6 +18,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import com.example.proyectofinalandroid.R;
 
 /**
  * Esta clase se encarga de gestionar la logica de la pantalla de registro

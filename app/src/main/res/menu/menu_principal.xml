@@ -8,7 +8,9 @@
         />
     <item
         android:title="Ajustes de usuario"
-        android:id="@+id/item_ajustes_usuario">
+        android:id="@+id/item_ajustes_usuario"
+        android:icon="@drawable/gear_solid"
+        app:showAsAction="always">
         <menu>
             <item android:id="@+id/item_cambiar_password"
                 android:title="Cambiar contraseña" />

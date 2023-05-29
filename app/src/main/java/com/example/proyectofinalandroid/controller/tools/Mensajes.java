@@ -26,7 +26,7 @@ public interface Mensajes {
     String ERROR_CAMBIO_USERNAME = "Error al cambiar el nombre de usuario";
     String ERROR_PASSWORDS = "Las contraseñas no coinciden";
     String CAMBIO_PASSWORD_CORRECTO = "Contraseña cambiada correctamente";
-    String ERROR_CAMBIO_CONTRASEÑA = "Error al cambiar la contraseña";
+    String ERROR_CAMBIO_CONTRASENA = "Error al cambiar la contraseña";
     String ERROR_FORMATO_TELEFONO = "Error, el telefono no cumple con los requistos";
     String CAMBIO_TELEFONO_CORRECTO = "Telefono cambiado correctamete";
     String MENSAJE_VOLVER_EN_PARTIDA = "No se puede volver atras hasta que finalices la partida";

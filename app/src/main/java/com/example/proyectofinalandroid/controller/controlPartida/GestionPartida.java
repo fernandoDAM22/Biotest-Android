@@ -1,15 +1,14 @@
 package com.example.proyectofinalandroid.controller.controlPartida;
 
 
-import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.proyectofinalandroid.R;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.proyectofinalandroid.R;
 import com.example.proyectofinalandroid.model.Partida;
 
 import java.util.ArrayList;
